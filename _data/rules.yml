@@ -42,4 +42,117 @@ rules:
           en: "JARL (Japan Amateur Radio League) - Licensing Guidance"
           ja: "日本アマチュア無線連盟 (JARL) - 免許案内"
         url: "https://www.jarl.org/"
+  # Based on JARL guidance: US - no application required in many cases
+  - home: japan
+    target: united_states
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: false
+    note:
+      en: "According to JARL, operation in the United States generally does not require prior application for Japanese license holders (see JARL page)."
+      ja: "JARLによれば、アメリカでは事前の申請が不要とされています（詳細はJARLの案内を参照）。"
+    links:
+      - title:
+          en: "JARL Overseas - United States"
+          ja: "JARL 海外 - アメリカ"
+        url: "https://www.jarl.org/"
+
+  # France: no application for stays up to 3 months (JARL)
+  - home: japan
+    target: france
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: false
+    max_days_without_license: 90
+    note:
+      en: "JARL: stays and operation in France up to 3 months do not require prior application."
+      ja: "JARL: フランスでは3か月以内の滞在・運用は事前申請不要とされています。"
+    links:
+      - title:
+          en: "JARL Overseas - France"
+          ja: "JARL 海外 - フランス"
+        url: "https://www.jarl.org/"
+
+  # Australia and New Zealand: 90 days without application per JARL
+  - home: japan
+    target: australia
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: false
+    max_days_without_license: 90
+    note:
+      en: "JARL: Australia allows operation for stays up to 90 days without prior application."
+      ja: "JARL: オーストラリアでは90日以内の滞在・運用は事前申請不要とされています。"
+    links:
+      - title:
+          en: "JARL Overseas - Australia"
+          ja: "JARL 海外 - オーストラリア"
+        url: "https://www.jarl.org/"
+
+  - home: japan
+    target: new_zealand
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: false
+    max_days_without_license: 90
+    note:
+      en: "JARL: New Zealand allows operation for stays up to 90 days without prior application."
+      ja: "JARL: ニュージーランドでは90日以内の滞在・運用は事前申請不要とされています。"
+    links:
+      - title:
+          en: "JARL Overseas - New Zealand"
+          ja: "JARL 海外 - ニュージーランド"
+        url: "https://www.jarl.org/"
+
+  # Germany: forms exist for up to 3 months and beyond (see JARL)
+  - home: japan
+    target: germany
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: null
+    max_days_without_license: 90
+    note:
+      en: "JARL: Germany provides application forms for stays up to 3 months and for longer stays; check the local procedure."
+      ja: "JARL: ドイツには3か月までの申請書と、3か月超のための申請書が用意されています。現地手続きを確認してください。"
+    links:
+      - title:
+          en: "JARL Overseas - Germany"
+          ja: "JARL 海外 - ドイツ"
+        url: "https://www.jarl.org/"
+
+  # Canada & Korea: JARL provides application methods — treat as requiring local application (see JARL pages)
+  - home: japan
+    target: canada
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: true
+    note:
+      en: "JARL: Canada has specific application procedures; consult JARL guidance."
+      ja: "JARL: カナダ向けの申請方法が案内されています。詳細はJARLを参照してください。"
+    links:
+      - title:
+          en: "JARL Overseas - Canada"
+          ja: "JARL 海外 - カナダ"
+        url: "https://www.jarl.org/"
+
+  - home: japan
+    target: korea
+    allowed_home_classes: ["1st", "2nd", "3rd", "4th"]
+    requires_station_license: true
+    note:
+      en: "JARL: Korea provides application methods; local permit procedures apply."
+      ja: "JARL: 韓国の申請方法が案内されています。現地の許可手続きを確認してください。"
+    links:
+      - title:
+          en: "JARL Overseas - Korea"
+          ja: "JARL 海外 - 韓国"
+        url: "https://www.jarl.org/"
+
+  # CEPT group: use CEPT rules (T/R61-02) — CEPT members listed on JARL page
+  - home: japan
+    target: cept_members
+    allowed_home_classes: ["1st", "2nd"]
+    requires_station_license: false
+    note:
+      en: "JARL: CEPT T/R 61-02 member countries allow operation under CEPT recommendations for eligible Japanese license classes."
+      ja: "JARL: CEPT加盟国では、該当する日本の免許区分に応じてCEPT勧告に基づく運用が認められます。"
+    links:
+      - title:
+          en: "CEPT T/R 61-02 reference (via JARL page)"
+          ja: "CEPT T/R 61-02（JARLページ参照）"
+        url: "https://www.jarl.org/"
 

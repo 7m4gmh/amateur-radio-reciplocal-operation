@@ -18,6 +18,9 @@ jobs:
       - name: Install bundler
         run: gem install bundler
 
+      - name: Validate data files
+        run: ruby ./scripts/validate_data.rb
+
       - name: Install dependencies
         run: bundle install
 

@@ -8,9 +8,11 @@
     const home = findCountry(countries, homeId);
     const target = findCountry(countries, targetId);
     if(!home || !target) return { ok: false, text: 'Country data missing' };
+    const lang = (typeof window !== 'undefined' && window.PAGE_LANG) ? window.PAGE_LANG : 'en';
+    const nameOf = (c) => (c && c.name && (c.name[lang] || c.name.en)) || (c && c.id) || '';
 
     if(homeId === targetId){
-      return { ok: true, text: '国内運用です。' };
+      return { ok: true, text: (lang === 'ja') ? '国内運用です。' : 'Domestic operation.' };
     }
 
     // 簡易: 共通の条約が一つでもあれば互換性の可能性あり
@@ -18,10 +20,10 @@
     if(common.length > 0){
       const treaty = common[0];
       const info = matrix[treaty] || {};
-      return { ok: true, text: `${target.name.ja}での運用には ${info.name || treaty} を参照してください。` };
+      return { ok: true, text: `${nameOf(target)} ${((lang === 'ja') ? 'での運用には' : ' - please consult')} ${info.name || treaty}` };
     }
 
-    return { ok: false, text: `${target.name.ja}での運用には、相互承認またはCEPT規定の確認が必要です。プリフィックスは ${target.prefix}/ です。` };
+    return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}での運用には、相互承認またはCEPT規定の確認が必要です。プリフィックスは ${target.prefix}/ です。` : `${nameOf(target)}: Reciprocity or CEPT rules should be checked. Prefix: ${target.prefix}/` };
   }
 
   // DOM helper to wire up page elements (if the page provides countries/matrix)

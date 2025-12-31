@@ -67,6 +67,7 @@ title: 海外運用シミュレーター
 
         <script>
         // Jekyll のビルド時に site.data を JSON 化してグローバル変数に格納します
+        window.PAGE_LANG = 'ja';
         window.COUNTRIES = {{ site.data.countries | jsonify }};
         window.MATRIX = {{ site.data.matrix | jsonify }};
         </script>

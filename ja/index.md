@@ -51,6 +51,7 @@ window.PAGE_LANG = 'ja';
 window.COUNTRIES = {{ site.data.countries | jsonify }};
 window.MATRIX = {{ site.data.matrix | jsonify }};
 window.LICENSES = {{ site.data.licenses | jsonify }};
+window.RULES = {{ site.data.rules | jsonify }};
 </script>
 <script src="/assets/js/simulator.js"></script>
 

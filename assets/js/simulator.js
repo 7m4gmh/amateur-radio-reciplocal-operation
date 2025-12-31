@@ -11,6 +11,22 @@
     const lang = (typeof window !== 'undefined' && window.PAGE_LANG) ? window.PAGE_LANG : 'en';
     const nameOf = (c) => (c && c.name && (c.name[lang] || c.name.en)) || (c && c.id) || '';
 
+    // Check explicit per-country rules first (if provided)
+    if(typeof window.RULES !== 'undefined' && window.RULES.rules){
+      const rules = window.RULES.rules;
+      const rule = rules.find(r => r.home === homeId && r.target === targetId);
+      if(rule){
+        const allowed = rule.allowed_home_classes || [];
+        const licenseOk = licenseClass && allowed.includes(licenseClass);
+        if(licenseOk){
+          return { ok: true, text: (lang === 'ja') ? `${nameOf(target)}での運用は選択された免許クラスで許可されています。` : `${nameOf(target)}: operation allowed for selected license.` };
+        }
+        // 明確なルールがあり許可されない場合はそれを返す
+        const note = (rule.note && (rule.note[lang] || rule.note.en)) ? (rule.note[lang] || rule.note.en) : '';
+        return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}では選択された免許クラスでは運用不可です。${note}` : `${nameOf(target)}: selected license not permitted. ${note}` };
+      }
+    }
+
     if(homeId === targetId){
       return { ok: true, text: (lang === 'ja') ? '国内運用です。' : 'Domestic operation.' };
     }

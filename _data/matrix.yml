@@ -1,0 +1,14 @@
+cept_tr6101:
+  name: "CEPT T/R 61-01"
+  conditions:
+    - home_class: "1st Class"
+      equivalent: "CEPT Class 1 (Full)"
+    - home_class: "2nd Class"
+      equivalent: "CEPT Class 2 (Novice)"
+reciprocal_jp_us:
+  name: "JP-US Reciprocal Agreement"
+  note: "(In US) Need to carry original license and ID. (In Japan) Need to apply a station license to the Ministry of Internal Affairs and Communications directly or through JARL."
+reciprocal_jp_fr:
+  name: "JP-FR Reciprocal Agreement"
+  note: "(In France) Need to carry original license and ID. (In Japan) Need to apply a station license to the Ministry of Internal Affairs and Communications directly or through JARL."
+

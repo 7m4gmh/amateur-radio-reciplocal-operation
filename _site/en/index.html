@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ham Radio Abroad — Simulator | Ham Radio Abroad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <header class="p-4 bg-blue-700 text-white">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <h1 class="font-bold">Ham Abroad</h1>
+    <nav>
+      <a href="/en/" class="px-3 text-sm">Simulator</a>
+      <a href="/en/docs/" class="px-3 text-sm">Docs</a>
+      <span class="px-3 text-sm">|</span>
+      <a href="/en/" class="px-2 text-sm">English</a>
+      <a href="/ja/" class="px-2 text-sm">日本語</a>
+    </nav>
+  </div>
+</header>
+
+    <main class="p-6">
+        <header class="p-4 bg-blue-700 text-white">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <h1 class="font-bold">Ham Abroad</h1>
+    <nav>
+      <a href="/en/" class="px-3 text-sm">Simulator</a>
+      <a href="/en/docs/" class="px-3 text-sm">Docs</a>
+      <span class="px-3 text-sm">|</span>
+      <a href="/en/" class="px-2 text-sm">English</a>
+      <a href="/ja/" class="px-2 text-sm">日本語</a>
+    </nav>
+  </div>
+</header>
+
+
+<div class="max-w-2xl mx-auto p-8">
+  <h2 class="text-2xl font-bold mb-6">Operation Compatibility Checker</h2>
+
+  <label class="block mb-3">
+    <span>Your license country</span>
+    <select id="home-country" class="w-full border p-2 rounded">
+      
+      <option value="japan">Japan</option>
+      
+      <option value="france">France</option>
+      
+      <option value="usa">USA</option>
+      
+    </select>
+  </label>
+
+  <label class="block mb-3">
+    <span>License class</span>
+    <select id="license-class" class="w-full border p-2 rounded">
+      <option value="1st Class">1st Class</option>
+      <option value="2nd Class">2nd Class</option>
+    </select>
+  </label>
+
+  <label class="block mb-3">
+    <span>Target country</span>
+    <select id="target-country" class="w-full border p-2 rounded">
+      
+      <option value="japan">Japan</option>
+      
+      <option value="france">France</option>
+      
+      <option value="usa">USA</option>
+      
+    </select>
+  </label>
+
+  <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded">Check</button>
+
+  <div id="result" class="mt-8 p-4 border rounded bg-white hidden">
+    <h3 class="font-bold text-lg text-blue-700">Result</h3>
+    <p id="result-text" class="mt-2"></p>
+  </div>
+</div>
+
+<script>
+window.COUNTRIES = [{"id":"japan","name":{"en":"Japan","ja":"日本"},"prefix":"JA","treaties":["reciprocal_jp_us","iarp"]},{"id":"france","name":{"en":"France","ja":"フランス"},"prefix":"F","treaties":["cept_tr6101"]},{"id":"usa","name":{"en":"USA","ja":"アメリカ"},"prefix":"K","treaties":["cept_tr6101","reciprocal_jp_us","iarp"]}];
+window.MATRIX = {"cept_tr6101":{"name":"CEPT T/R 61-01","conditions":[{"home_class":"1st Class","equivalent":"CEPT Class 1 (Full)"},{"home_class":"2nd Class","equivalent":"CEPT Class 2 (Novice)"}]},"reciprocal_jp_us":{"name":"JP-US Reciprocal Agreement","note":"(In US) Need to carry original license and ID. (In Japan) Need to apply a station license to the Ministry of Internal Affairs and Communications directly or through JARL."},"reciprocal_jp_fr":{"name":"JP-FR Reciprocal Agreement","note":"(In France) Need to carry original license and ID. (In Japan) Need to apply a station license to the Ministry of Internal Affairs and Communications directly or through JARL."}};
+</script>
+<script src="/assets/js/simulator.js"></script>
+
+<footer class="p-6 bg-gray-100 text-sm text-gray-700 mt-12">
+  <div class="max-w-6xl mx-auto text-center">
+    <p>&copy; 2025 7M4GMH, Ham Abroad Simulation</p>
+    <p>最終更新: 2025-12-31</p>
+  </div>
+</footer>
+
+
+    </main>
+    <footer class="p-6 bg-gray-100 text-sm text-gray-700 mt-12">
+  <div class="max-w-6xl mx-auto text-center">
+    <p>&copy; 2025 7M4GMH, Ham Abroad Simulation</p>
+    <p>最終更新: 2025-12-31</p>
+  </div>
+</footer>
+
+</body>
+</html>

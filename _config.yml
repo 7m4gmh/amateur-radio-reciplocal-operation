@@ -1,0 +1,14 @@
+title: Ham Abroad Simulation
+baseurl: ""
+url: ""
+theme: minima
+plugins: []
+
+collections: {}
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: default

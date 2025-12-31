@@ -1,0 +1,3 @@
+/* Minimal stylesheet — extra styling can be added or Tailwind can be integrated via PostCSS */
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+.container { max-width: 960px; margin: 0 auto; padding: 1rem; }

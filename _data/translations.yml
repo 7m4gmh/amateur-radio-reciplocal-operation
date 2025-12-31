@@ -1,0 +1,24 @@
+nav:
+  home:
+    en: "Home"
+    ja: "ホーム"
+  docs:
+    en: "Docs"
+    ja: "ドキュメント"
+  simulator:
+    en: "Simulator"
+    ja: "シミュレーター"
+labels:
+  home_country:
+    en: "Your license country"
+    ja: "あなたの免許発行国"
+  license_class:
+    en: "License class"
+    ja: "免許クラス"
+  target_country:
+    en: "Target country"
+    ja: "運用希望国"
+buttons:
+  check:
+    en: "Check"
+    ja: "判定する"

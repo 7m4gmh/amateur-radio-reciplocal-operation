@@ -1,0 +1,24 @@
+- id: japan
+  name:
+    en: "Japan"
+    ja: "日本"
+  prefix: "JA"
+  treaties:
+    - "reciprocal_jp_us"
+    - "iarp"
+- id: france
+  name:
+    en: "France"
+    ja: "フランス"
+  prefix: "F"
+  treaties:
+    - "cept_tr6101"
+- id: usa
+  name:
+    en: "USA"
+    ja: "アメリカ"
+  prefix: "K"
+  treaties:
+    - "cept_tr6101"
+    - "reciprocal_jp_us"
+    - "iarp"

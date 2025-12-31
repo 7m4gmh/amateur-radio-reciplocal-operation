@@ -1,0 +1,52 @@
+---
+layout: default
+lang: en
+title: Ham Radio Abroad — Simulator
+---
+
+{% include header.html %}
+
+<div class="max-w-2xl mx-auto p-8">
+  <h2 class="text-2xl font-bold mb-6">Operation Compatibility Checker</h2>
+
+  <label class="block mb-3">
+    <span>{{ site.data.translations.labels.home_country.en }}</span>
+    <select id="home-country" class="w-full border p-2 rounded">
+      {% for country in site.data.countries %}
+      <option value="{{ country.id }}">{{ country.name.en }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label class="block mb-3">
+    <span>{{ site.data.translations.labels.license_class.en }}</span>
+    <select id="license-class" class="w-full border p-2 rounded">
+      <option value="1st Class">1st Class</option>
+      <option value="2nd Class">2nd Class</option>
+    </select>
+  </label>
+
+  <label class="block mb-3">
+    <span>{{ site.data.translations.labels.target_country.en }}</span>
+    <select id="target-country" class="w-full border p-2 rounded">
+      {% for country in site.data.countries %}
+      <option value="{{ country.id }}">{{ country.name.en }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded">{{ site.data.translations.buttons.check.en }}</button>
+
+  <div id="result" class="mt-8 p-4 border rounded bg-white hidden">
+    <h3 class="font-bold text-lg text-blue-700">Result</h3>
+    <p id="result-text" class="mt-2"></p>
+  </div>
+</div>
+
+<script>
+window.COUNTRIES = {{ site.data.countries | jsonify }};
+window.MATRIX = {{ site.data.matrix | jsonify }};
+</script>
+<script src="/assets/js/simulator.js"></script>
+
+{% include footer.html %}

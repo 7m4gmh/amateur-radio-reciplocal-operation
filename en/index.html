@@ -32,7 +32,7 @@ title: Ham Radio Abroad — Simulator
     </select>
   </label>
 
-  <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded">{{ site.data.translations.buttons.check.en }}</button>
+  <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded">{{ site.data.translations.en.buttons.check }}</button>
 
   <div id="result" class="mt-8 p-4 border rounded bg-white hidden">
     <h3 class="font-bold text-lg text-blue-700">Result</h3>
@@ -48,5 +48,6 @@ window.COUNTRIES = {{ site.data.countries | jsonify }};
 window.MATRIX = {{ site.data.matrix | jsonify }};
 window.LICENSES = {{ site.data.licenses | jsonify }};
 window.RULES = {{ site.data.rules | jsonify }};
+window.TRANSLATIONS = {{ site.data.translations | jsonify }};
 </script>
 <script src="/assets/js/simulator.js"></script>

@@ -4,12 +4,12 @@ lang: ja
 title: 海外運用シミュレーター
 ---
 
-<div class="max-w-2xl mx-auto p-8">
-  <h2 class="text-2xl font-bold mb-6">運用条件をチェック</h2>
+  <div class="max-w-2xl mx-auto p-8">
+  <h2 class="text-2xl font-bold mb-6">{{ site.data.translations.ja.labels.home_country | default: "運用条件をチェック" }}</h2>
 
   <div class="space-y-4">
     <label class="block">
-      <span>出発国:</span>
+      <span>{{ site.data.translations.ja.labels.home_country }}</span>
       <select id="home-country" class="w-full border p-2 rounded">
         {% for country in site.data.countries %}
         <option value="{{ country.id }}">{{ country.name.ja }}</option>
@@ -19,7 +19,7 @@ title: 海外運用シミュレーター
 
     <!-- 免許クラス -->
     <label class="block">
-      <span>免許クラス:</span>
+      <span>{{ site.data.translations.ja.labels.license_class }}</span>
       <select id="license-class" class="w-full border p-2 rounded">
         <!-- options populated dynamically by assets/js/simulator.js based on selected home country -->
       </select>
@@ -27,7 +27,7 @@ title: 海外運用シミュレーター
 
     <!-- 運用先 -->
     <label class="block">
-      <span>運用希望国:</span>
+      <span>{{ site.data.translations.ja.labels.target_country }}</span>
       <select id="target-country" class="w-full border p-2 rounded">
         {% for country in site.data.countries %}
         <option value="{{ country.id }}">{{ country.name.ja }}</option>
@@ -35,7 +35,7 @@ title: 海外運用シミュレーター
       </select>
     </label>
 
-    <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded shadow">判定する</button>
+  <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded shadow">{{ site.data.translations.ja.buttons.check }}</button>
   </div>
 
   <!-- 結果表示エリア -->

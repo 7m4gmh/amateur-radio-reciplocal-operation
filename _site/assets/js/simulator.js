@@ -9,6 +9,14 @@
     const target = findCountry(countries, targetId);
     if(!home || !target) return { ok: false, text: 'Country data missing' };
     const lang = (typeof window !== 'undefined' && window.PAGE_LANG) ? window.PAGE_LANG : 'en';
+    const translations = (typeof window !== 'undefined' && window.TRANSLATIONS) ? (window.TRANSLATIONS[lang] || window.TRANSLATIONS['en']) : null;
+    const t = (key, fallback) => {
+      if(!translations) return (fallback || '');
+      const parts = key.split('.');
+      let cur = translations;
+      for(let p of parts){ if(cur[p] === undefined) return (fallback || ''); cur = cur[p]; }
+      return cur;
+    };
     const nameOf = (c) => (c && c.name && (c.name[lang] || c.name.en)) || (c && c.id) || '';
 
     // Check explicit per-country rules first (if provided)
@@ -19,19 +27,21 @@
         const allowed = rule.allowed_home_classes || [];
         const licenseOk = licenseClass && allowed.includes(licenseClass);
         if(licenseOk){
-          const stationNote = (typeof rule.requires_station_license !== 'undefined') ? (rule.requires_station_license ? ((lang === 'ja') ? '事前の無線局免許申請が必要です。' : 'Prior station license application is required.') : ((lang === 'ja') ? '事前の無線局免許申請は不要です。' : 'No prior station license application is required.')) : '';
+          const stationNote = (typeof rule.requires_station_license !== 'undefined') ? (rule.requires_station_license ? t('messages.station_required', ((lang === 'ja') ? '事前の無線局免許申請が必要です。' : 'Prior station license application is required.')) : t('messages.station_not_required', ((lang === 'ja') ? '事前の無線局免許申請は不要です。' : 'No prior station license application is required.'))) : '';
           const note = (rule.note && (rule.note[lang] || rule.note.en)) ? (rule.note[lang] || rule.note.en) : '';
-          return { ok: true, text: (lang === 'ja') ? `${nameOf(target)}での運用は選択された免許クラスで許可されています。 ${stationNote} ${note}` : `${nameOf(target)}: operation allowed for selected license. ${stationNote} ${note}` };
+          const links = rule.links || null;
+          return { ok: true, text: (lang === 'ja') ? `${nameOf(target)}${t('messages.operation_allowed', 'での運用は選択された免許クラスで許可されています。')} ${stationNote} ${note}` : `${nameOf(target)}: ${t('messages.operation_allowed', 'operation allowed for selected license.')} ${stationNote} ${note}`, links };
         }
         // 明確なルールがあり許可されない場合はそれを返す
         const note = (rule.note && (rule.note[lang] || rule.note.en)) ? (rule.note[lang] || rule.note.en) : '';
-        const stationNote = (typeof rule.requires_station_license !== 'undefined') ? (rule.requires_station_license ? ((lang === 'ja') ? '事前の無線局免許申請が必要です。' : 'Prior station license application is required.') : ((lang === 'ja') ? '事前の無線局免許申請は不要です。' : 'No prior station license application is required.')) : '';
-        return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}では選択された免許クラスでは運用不可です。 ${stationNote} ${note}` : `${nameOf(target)}: selected license not permitted. ${stationNote} ${note}` };
+        const stationNote = (typeof rule.requires_station_license !== 'undefined') ? (rule.requires_station_license ? t('messages.station_required', ((lang === 'ja') ? '事前の無線局免許申請が必要です。' : 'Prior station license application is required.')) : t('messages.station_not_required', ((lang === 'ja') ? '事前の無線局免許申請は不要です。' : 'No prior station license application is required.'))) : '';
+        const links = rule.links || null;
+        return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}${t('messages.operation_not_permitted', 'では選択された免許クラスでは運用不可です。')} ${stationNote} ${note}` : `${nameOf(target)}: ${t('messages.operation_not_permitted', 'selected license not permitted.')} ${stationNote} ${note}`, links };
       }
     }
 
     if(homeId === targetId){
-      return { ok: true, text: (lang === 'ja') ? '国内運用です。' : 'Domestic operation.' };
+      return { ok: true, text: t('messages.result_heading', (lang === 'ja') ? '国内運用です。' : 'Domestic operation.') };
     }
 
     // 簡易: 共通の条約が一つでもあれば互換性の可能性あり
@@ -48,10 +58,12 @@
         }
       }
       const licensePart = licenseClass ? ((lang === 'ja') ? `（免許: ${licenseClass}）` : ` (license: ${licenseClass})`) : '';
-      return { ok: true, text: `${nameOf(target)} ${((lang === 'ja') ? 'での運用には' : ' - please consult')} ${info.name || treaty}${licensePart}${stationNote}` };
+      const consult = (lang === 'ja') ? 'での運用には' : ' - please consult';
+      return { ok: true, text: `${nameOf(target)} ${consult} ${info.name || treaty}${licensePart}${stationNote}` };
     }
 
-    return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}での運用には、相互承認またはCEPT規定の確認が必要です。プリフィックスは ${target.prefix}/ です。` : `${nameOf(target)}: Reciprocity or CEPT rules should be checked. Prefix: ${target.prefix}/` };
+    const fallback = (lang === 'ja') ? `${nameOf(target)}での運用には、相互承認またはCEPT規定の確認が必要です。プリフィックスは ${target.prefix}/ です。` : `${nameOf(target)}: Reciprocity or CEPT rules should be checked. Prefix: ${target.prefix}/`;
+    return { ok: false, text: t('messages.no_country_data', fallback) };
   }
 
   // DOM helper to wire up page elements (if the page provides countries/matrix)
@@ -108,7 +120,19 @@
       const res = checkCompatibility(home, target, license, countries, matrix);
       const resultDiv = document.getElementById('result');
       const resultText = document.getElementById('result-text');
-      resultText.innerText = res.text;
+      // render text and optional links
+      if(res.links && Array.isArray(res.links) && res.links.length > 0){
+        let html = '<div>' + (res.text || '') + '</div>';
+        html += '<ul class="mt-2 text-sm text-blue-700">';
+        res.links.forEach(link => {
+          const title = (link.title && (link.title[lang] || link.title.en)) ? (link.title[lang] || link.title.en) : (link.url || 'link');
+          html += `<li><a href="${link.url}" target="_blank" rel="noopener noreferrer">${title}</a></li>`;
+        });
+        html += '</ul>';
+        resultText.innerHTML = html;
+      } else {
+        resultText.innerText = res.text || '';
+      }
       resultDiv.classList.remove('hidden');
     });
   }

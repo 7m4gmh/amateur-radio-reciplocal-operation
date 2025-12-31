@@ -1,3 +1,34 @@
+en:
+  labels:
+    home_country: "Home country"
+    license_class: "License class"
+    target_country: "Target country"
+  buttons:
+    check: "Check"
+  messages:
+    result_heading: "Result"
+    no_country_data: "Country data missing"
+    operation_allowed: "operation allowed for selected license."
+    operation_not_permitted: "selected license not permitted."
+    station_required: "Prior station license application is required."
+    station_not_required: "No prior station license application is required."
+    no_license_info: "(no license info)"
+
+ja:
+  labels:
+    home_country: "出発国"
+    license_class: "免許クラス"
+    target_country: "運用希望国"
+  buttons:
+    check: "判定する"
+  messages:
+    result_heading: "判定結果"
+    no_country_data: "国データが不足しています"
+    operation_allowed: "での運用は選択された免許クラスで許可されています。"
+    operation_not_permitted: "では選択された免許クラスでは運用不可です。"
+    station_required: "事前の無線局免許申請が必要です。"
+    station_not_required: "事前の無線局免許申請は不要です。"
+    no_license_info: "（免許情報なし）"
 nav:
   home:
     en: "Home"

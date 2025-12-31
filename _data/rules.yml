@@ -26,3 +26,20 @@ rules:
       en: "Japan 1st class typically required for simplified reciprocity to USA; prior station license generally not required (sample)."
       ja: "日本の第1級は米国への簡易相互運用に必要で、事前の無線局免許申請は通常不要です（サンプル）。"
 
+  - home: france
+    target: japan
+    allowed_home_classes: ["full", "novice"]
+    requires_station_license: true
+    requires_station_license_reason:
+      en: "French license holders generally must apply for a Japanese station license before operating; consult Japanese authorities."
+      ja: "フランスの免許で日本国内で運用する場合、事前に日本の無線局免許の申請が必要となることが多いです。詳細は総務省等に確認してください。"
+    links:
+      - title:
+          en: "Ministry of Internal Affairs and Communications (Japan)"
+          ja: "総務省 (日本)"
+        url: "https://www.soumu.go.jp/"
+      - title:
+          en: "JARL (Japan Amateur Radio League) - Licensing Guidance"
+          ja: "日本アマチュア無線連盟 (JARL) - 免許案内"
+        url: "https://www.jarl.org/"
+

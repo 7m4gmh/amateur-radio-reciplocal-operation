@@ -19,11 +19,14 @@
         const allowed = rule.allowed_home_classes || [];
         const licenseOk = licenseClass && allowed.includes(licenseClass);
         if(licenseOk){
-          return { ok: true, text: (lang === 'ja') ? `${nameOf(target)}での運用は選択された免許クラスで許可されています。` : `${nameOf(target)}: operation allowed for selected license.` };
+          const stationNote = (typeof rule.requires_station_license !== 'undefined') ? (rule.requires_station_license ? ((lang === 'ja') ? '事前の無線局免許申請が必要です。' : 'Prior station license application is required.') : ((lang === 'ja') ? '事前の無線局免許申請は不要です。' : 'No prior station license application is required.')) : '';
+          const note = (rule.note && (rule.note[lang] || rule.note.en)) ? (rule.note[lang] || rule.note.en) : '';
+          return { ok: true, text: (lang === 'ja') ? `${nameOf(target)}での運用は選択された免許クラスで許可されています。 ${stationNote} ${note}` : `${nameOf(target)}: operation allowed for selected license. ${stationNote} ${note}` };
         }
         // 明確なルールがあり許可されない場合はそれを返す
         const note = (rule.note && (rule.note[lang] || rule.note.en)) ? (rule.note[lang] || rule.note.en) : '';
-        return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}では選択された免許クラスでは運用不可です。${note}` : `${nameOf(target)}: selected license not permitted. ${note}` };
+        const stationNote = (typeof rule.requires_station_license !== 'undefined') ? (rule.requires_station_license ? ((lang === 'ja') ? '事前の無線局免許申請が必要です。' : 'Prior station license application is required.') : ((lang === 'ja') ? '事前の無線局免許申請は不要です。' : 'No prior station license application is required.')) : '';
+        return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}では選択された免許クラスでは運用不可です。 ${stationNote} ${note}` : `${nameOf(target)}: selected license not permitted. ${stationNote} ${note}` };
       }
     }
 
@@ -36,8 +39,16 @@
     if(common.length > 0){
       const treaty = common[0];
       const info = matrix[treaty] || {};
+      // If treaty defines conditions with requires_station_license, try to match by licenseClass
+      let stationNote = '';
+      if(info.conditions && licenseClass){
+        const cond = info.conditions.find(c => (c.home_class && (c.home_class.toLowerCase().includes(licenseClass.toLowerCase()) || c.home_class.toLowerCase() === licenseClass.toLowerCase())));
+        if(cond && typeof cond.requires_station_license !== 'undefined'){
+          stationNote = cond.requires_station_license ? ((lang === 'ja') ? ' 事前の無線局免許申請が必要です。' : ' Prior station license application is required.') : ((lang === 'ja') ? ' 事前の無線局免許申請は不要です。' : ' No prior station license application is required.');
+        }
+      }
       const licensePart = licenseClass ? ((lang === 'ja') ? `（免許: ${licenseClass}）` : ` (license: ${licenseClass})`) : '';
-      return { ok: true, text: `${nameOf(target)} ${((lang === 'ja') ? 'での運用には' : ' - please consult')} ${info.name || treaty}${licensePart}` };
+      return { ok: true, text: `${nameOf(target)} ${((lang === 'ja') ? 'での運用には' : ' - please consult')} ${info.name || treaty}${licensePart}${stationNote}` };
     }
 
     return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}での運用には、相互承認またはCEPT規定の確認が必要です。プリフィックスは ${target.prefix}/ です。` : `${nameOf(target)}: Reciprocity or CEPT rules should be checked. Prefix: ${target.prefix}/` };

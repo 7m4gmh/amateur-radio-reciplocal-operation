@@ -1,25 +1,28 @@
 ---
 # Explicit per-home/target rules mapping allowed home license ids to operation permission in target
+
 rules:
   - home: japan
     target: france
     allowed_home_classes: ["1st", "2nd"]
+    requires_station_license: false
     note:
-      en: "Japan 1st/2nd class holders may operate in France under reciprocal arrangements (sample)."
-      ja: "第1級・第2級はフランスでの運用が可能（サンプル）。"
+      en: "Japan 1st/2nd class holders may operate in France without prior station license application (sample)."
+      ja: "第1級・第2級はフランスでの運用が可能で、事前の無線局免許申請は不要です（サンプル）。"
 
   - home: usa
     target: japan
     allowed_home_classes: ["extra", "general"]
+    requires_station_license: false
     note:
-      en: "US Extra/General may operate in Japan under limited reciprocity (sample)."
-      ja: "米国のエクストラ/ジェネラルは限定的に日本で運用可能（サンプル）。"
+      en: "US Extra/General may operate in Japan under limited reciprocity; prior station license requirements vary (sample)."
+      ja: "米国のエクストラ/ジェネラルは限定的に日本で運用可能です。事前の無線局免許要否は場合により異なります（サンプル）。"
 
   - home: japan
     target: usa
     allowed_home_classes: ["1st"]
+    requires_station_license: false
     note:
-      en: "Japan 1st class typically required for simplified reciprocity to USA (sample)."
-      ja: "日本の第1級が簡易相互運用に必要（サンプル）。"
+      en: "Japan 1st class typically required for simplified reciprocity to USA; prior station license generally not required (sample)."
+      ja: "日本の第1級は米国への簡易相互運用に必要で、事前の無線局免許申請は通常不要です（サンプル）。"
 
-...

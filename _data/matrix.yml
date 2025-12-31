@@ -3,6 +3,7 @@ cept_tr6101:
   conditions:
     - home_class: "1st Class"
       equivalent: "CEPT Class 1 (Full)"
+      requires_station_license: false
     - home_class: "2nd Class"
       equivalent: "CEPT Class 2 (Novice)"
 reciprocal_jp_us:

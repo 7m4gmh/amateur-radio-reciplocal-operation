@@ -6,6 +6,9 @@
   treaties:
     - "reciprocal_jp_us"
     - "iarp"
+  cept: false
+  cept_novice: false
+  harec: false
 - id: france
   name:
     en: "France"
@@ -13,6 +16,9 @@
   prefix: "F"
   treaties:
     - "cept_tr6101"
+  cept: true
+  cept_novice: true
+  harec: true
 - id: usa
   name:
     en: "USA"
@@ -22,3 +28,6 @@
     - "cept_tr6101"
     - "reciprocal_jp_us"
     - "iarp"
+  cept: false
+  cept_novice: false
+  harec: false

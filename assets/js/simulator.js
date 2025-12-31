@@ -77,6 +77,24 @@
     if(!btn) return;
 
     const licenseSelect = document.getElementById('license-class');
+    const homeSchemesDiv = document.getElementById('home-schemes');
+    const targetSchemesDiv = document.getElementById('target-schemes');
+
+    function renderSchemes(countryId, container){
+      if(!container) return;
+      const country = findCountry(countries, countryId);
+      if(!country){ container.innerText = ''; return; }
+      const lang = (typeof window !== 'undefined' && window.PAGE_LANG) ? window.PAGE_LANG : 'en';
+      const tr = (typeof window !== 'undefined' && window.TRANSLATIONS) ? (window.TRANSLATIONS[lang] || window.TRANSLATIONS['en']) : null;
+      const label = (key, fallback) => { if(!tr) return fallback; return tr['labels'] && tr['labels'][key] ? tr['labels'][key] : fallback; };
+      const yes = (lang === 'ja') ? 'はい' : 'Yes';
+      const no = (lang === 'ja') ? 'いいえ' : 'No';
+      const lines = [];
+      lines.push(`${label('scheme_cept', 'CEPT')}: ${country.cept ? yes : no}`);
+      lines.push(`${label('scheme_cept_novice', 'CEPT Novice')}: ${country.cept_novice ? yes : no}`);
+      lines.push(`${label('scheme_harec', 'HAREC')}: ${country.harec ? yes : no}`);
+      container.innerText = lines.join(' | ');
+    }
 
     function getLicenseListForCountry(countryId){
       if(!licenses) return [];
@@ -110,7 +128,16 @@
     const homeSelect = document.getElementById('home-country');
     if(homeSelect){
       populateLicenseOptions(homeSelect.value);
-      homeSelect.addEventListener('change', (e)=> populateLicenseOptions(e.target.value));
+      homeSelect.addEventListener('change', (e)=> { populateLicenseOptions(e.target.value); renderSchemes(e.target.value, homeSchemesDiv); });
+      // initial render
+      renderSchemes(homeSelect.value, homeSchemesDiv);
+    }
+
+    const targetSelect = document.getElementById('target-country');
+    if(targetSelect){
+      targetSelect.addEventListener('change', (e)=> renderSchemes(e.target.value, targetSchemesDiv));
+      // initial render
+      renderSchemes(targetSelect.value, targetSchemesDiv);
     }
 
     btn.addEventListener('click', ()=>{

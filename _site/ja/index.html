@@ -22,11 +22,11 @@
 
     <main class="p-6">
         <div class="max-w-2xl mx-auto p-8">
-  <h2 class="text-2xl font-bold mb-6">出発国</h2>
+  <h2 class="text-2xl font-bold mb-6">運用条件をチェック</h2>
 
   <div class="space-y-4">
     <label class="block">
-      <span>出発国</span>
+      <span></span>
       <select id="home-country" class="w-full border p-2 rounded">
         
         <option value="japan">日本</option>
@@ -38,9 +38,13 @@
       </select>
     </label>
 
+    <div id="home-schemes" class="text-sm text-gray-700 mt-2">
+      <!-- populated by simulator.js: CEPT / CEPT Novice / HAREC applicability for home -->
+    </div>
+
     <!-- 免許クラス -->
     <label class="block">
-      <span>免許クラス</span>
+      <span></span>
       <select id="license-class" class="w-full border p-2 rounded">
         <!-- options populated dynamically by assets/js/simulator.js based on selected home country -->
       </select>
@@ -48,7 +52,7 @@
 
     <!-- 運用先 -->
     <label class="block">
-      <span>運用希望国</span>
+      <span></span>
       <select id="target-country" class="w-full border p-2 rounded">
         
         <option value="japan">日本</option>
@@ -59,6 +63,10 @@
         
       </select>
     </label>
+
+    <div id="target-schemes" class="text-sm text-gray-700 mt-2">
+      <!-- populated by simulator.js: CEPT / CEPT Novice / HAREC applicability for target -->
+    </div>
 
   <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded shadow">判定する</button>
   </div>
@@ -73,10 +81,10 @@
 <script>
 // Jekyll のビルド時に site.data を JSON 化してグローバル変数に格納します
 window.PAGE_LANG = 'ja';
-window.COUNTRIES = [{"id":"japan","name":{"en":"Japan","ja":"日本"},"prefix":"JA","treaties":["reciprocal_jp_us","iarp"]},{"id":"france","name":{"en":"France","ja":"フランス"},"prefix":"F","treaties":["cept_tr6101"]},{"id":"usa","name":{"en":"USA","ja":"アメリカ"},"prefix":"K","treaties":["cept_tr6101","reciprocal_jp_us","iarp"]}];
+window.COUNTRIES = [{"id":"japan","name":{"en":"Japan","ja":"日本"},"prefix":"JA","treaties":["reciprocal_jp_us","iarp"],"cept":false,"cept_novice":false,"harec":false},{"id":"france","name":{"en":"France","ja":"フランス"},"prefix":"F","treaties":["cept_tr6101"],"cept":true,"cept_novice":true,"harec":true},{"id":"usa","name":{"en":"USA","ja":"アメリカ"},"prefix":"K","treaties":["cept_tr6101","reciprocal_jp_us","iarp"],"cept":false,"cept_novice":false,"harec":false}];
 window.MATRIX = {"cept_tr6101":{"name":"CEPT T/R 61-01","conditions":[{"home_class":"1st Class","equivalent":"CEPT Class 1 (Full)","requires_station_license":false},{"home_class":"2nd Class","equivalent":"CEPT Class 2 (Novice)"}]},"reciprocal_jp_us":{"name":"JP-US Reciprocal Agreement","note":"(In US) Need to carry original license and ID. (In Japan) Need to apply a station license to the Ministry of Internal Affairs and Communications directly or through JARL."},"reciprocal_jp_fr":{"name":"JP-FR Reciprocal Agreement","note":"(In France) Need to carry original license and ID. (In Japan) Need to apply a station license to the Ministry of Internal Affairs and Communications directly or through JARL."}};
 window.LICENSES = [{"id":"japan","classes":[{"id":"1st","name":{"en":"1st Class","ja":"第1級アマチュア無線技士"}},{"id":"2nd","name":{"en":"2nd Class","ja":"第2級アマチュア無線技士"}},{"id":"3rd","name":{"en":"3rd Class","ja":"第3級アマチュア無線技士"}},{"id":"4th","name":{"en":"4th Class","ja":"第4級アマチュア無線技士"}}]},{"id":"france","classes":[{"id":"full","name":{"en":"Full","ja":"フル（無線技士相当）"}},{"id":"novice","name":{"en":"Novice","ja":"ノービス"}}]},{"id":"usa","classes":[{"id":"extra","name":{"en":"Extra","ja":"エクストラ"}},{"id":"general","name":{"en":"General","ja":"ジェネラル"}},{"id":"technician","name":{"en":"Technician","ja":"テクニシャン"}}]}];
-window.RULES = {"rules":[{"home":"japan","target":"france","allowed_home_classes":["1st","2nd"],"requires_station_license":false,"note":{"en":"Japan 1st/2nd class holders may operate in France without prior station license application (sample).","ja":"第1級・第2級はフランスでの運用が可能で、事前の無線局免許申請は不要です（サンプル）。"}},{"home":"usa","target":"japan","allowed_home_classes":["extra","general"],"requires_station_license":false,"note":{"en":"US Extra/General may operate in Japan under limited reciprocity; prior station license requirements vary (sample).","ja":"米国のエクストラ/ジェネラルは限定的に日本で運用可能です。事前の無線局免許要否は場合により異なります（サンプル）。"}},{"home":"japan","target":"usa","allowed_home_classes":["1st"],"requires_station_license":false,"note":{"en":"Japan 1st class typically required for simplified reciprocity to USA; prior station license generally not required (sample).","ja":"日本の第1級は米国への簡易相互運用に必要で、事前の無線局免許申請は通常不要です（サンプル）。"}},{"home":"france","target":"japan","allowed_home_classes":["full","novice"],"requires_station_license":true,"requires_station_license_reason":{"en":"French license holders generally must apply for a Japanese station license before operating; consult Japanese authorities.","ja":"フランスの免許で日本国内で運用する場合、事前に日本の無線局免許の申請が必要となることが多いです。詳細は総務省等に確認してください。"},"links":[{"title":{"en":"Ministry of Internal Affairs and Communications (Japan)","ja":"総務省 (日本)"},"url":"https://www.soumu.go.jp/"},{"title":{"en":"JARL (Japan Amateur Radio League) - Licensing Guidance","ja":"日本アマチュア無線連盟 (JARL) - 免許案内"},"url":"https://www.jarl.org/"}]}]};
+window.RULES = {"rules":[{"home":"japan","target":"france","allowed_home_classes":["1st","2nd"],"requires_station_license":false,"note":{"en":"Japan 1st/2nd class holders may operate in France without prior station license application (sample).","ja":"第1級・第2級はフランスでの運用が可能で、事前の無線局免許申請は不要です（サンプル）。"}},{"home":"usa","target":"japan","allowed_home_classes":["extra","general"],"requires_station_license":false,"note":{"en":"US Extra/General may operate in Japan under limited reciprocity; prior station license requirements vary (sample).","ja":"米国のエクストラ/ジェネラルは限定的に日本で運用可能です。事前の無線局免許要否は場合により異なります（サンプル）。"}},{"home":"japan","target":"usa","allowed_home_classes":["1st"],"requires_station_license":false,"note":{"en":"Japan 1st class typically required for simplified reciprocity to USA; prior station license generally not required (sample).","ja":"日本の第1級は米国への簡易相互運用に必要で、事前の無線局免許申請は通常不要です（サンプル）。"}},{"home":"france","target":"japan","allowed_home_classes":["full","novice"],"requires_station_license":true,"requires_station_license_reason":{"en":"French license holders generally must apply for a Japanese station license before operating; consult Japanese authorities.","ja":"フランスの免許で日本国内で運用する場合、事前に日本の無線局免許の申請が必要となることが多いです。詳細は総務省等に確認してください。"},"links":[{"title":{"en":"Ministry of Internal Affairs and Communications (Japan)","ja":"総務省 (日本)"},"url":"https://www.soumu.go.jp/"},{"title":{"en":"JARL (Japan Amateur Radio League) - Licensing Guidance","ja":"日本アマチュア無線連盟 (JARL) - 免許案内"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"united_states","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":false,"note":{"en":"According to JARL, operation in the United States generally does not require prior application for Japanese license holders (see JARL page).","ja":"JARLによれば、アメリカでは事前の申請が不要とされています（詳細はJARLの案内を参照）。"},"links":[{"title":{"en":"JARL Overseas - United States","ja":"JARL 海外 - アメリカ"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"france","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":false,"max_days_without_license":90,"note":{"en":"JARL: stays and operation in France up to 3 months do not require prior application.","ja":"JARL: フランスでは3か月以内の滞在・運用は事前申請不要とされています。"},"links":[{"title":{"en":"JARL Overseas - France","ja":"JARL 海外 - フランス"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"australia","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":false,"max_days_without_license":90,"note":{"en":"JARL: Australia allows operation for stays up to 90 days without prior application.","ja":"JARL: オーストラリアでは90日以内の滞在・運用は事前申請不要とされています。"},"links":[{"title":{"en":"JARL Overseas - Australia","ja":"JARL 海外 - オーストラリア"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"new_zealand","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":false,"max_days_without_license":90,"note":{"en":"JARL: New Zealand allows operation for stays up to 90 days without prior application.","ja":"JARL: ニュージーランドでは90日以内の滞在・運用は事前申請不要とされています。"},"links":[{"title":{"en":"JARL Overseas - New Zealand","ja":"JARL 海外 - ニュージーランド"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"germany","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":null,"max_days_without_license":90,"note":{"en":"JARL: Germany provides application forms for stays up to 3 months and for longer stays; check the local procedure.","ja":"JARL: ドイツには3か月までの申請書と、3か月超のための申請書が用意されています。現地手続きを確認してください。"},"links":[{"title":{"en":"JARL Overseas - Germany","ja":"JARL 海外 - ドイツ"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"canada","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":true,"note":{"en":"JARL: Canada has specific application procedures; consult JARL guidance.","ja":"JARL: カナダ向けの申請方法が案内されています。詳細はJARLを参照してください。"},"links":[{"title":{"en":"JARL Overseas - Canada","ja":"JARL 海外 - カナダ"},"url":"https://www.jarl.org/"}]},{"home":"japan","target":"korea","allowed_home_classes":["1st","2nd","3rd","4th"],"requires_station_license":true,"note":{"en":"JARL: Korea provides application methods; local permit procedures apply.","ja":"JARL: 韓国の申請方法が案内されています。現地の許可手続きを確認してください。"},"links":[{"title":{"en":"JARL Overseas - Korea","ja":"JARL 海外 - 韓国"},"url":"https://www.jarl.org/"}],"application_url":"https://www.jarl.org/Japanese/8_World/8-1_overseas/KoreaInstructions2018.doc"},{"home":"japan","target":"cept_members","allowed_home_classes":["1st","2nd"],"requires_station_license":false,"note":{"en":"JARL: CEPT T/R 61-02 member countries allow operation under CEPT recommendations for eligible Japanese license classes.","ja":"JARL: CEPT加盟国では、該当する日本の免許区分に応じてCEPT勧告に基づく運用が認められます。"},"links":[{"title":{"en":"CEPT T/R 61-02 reference (via JARL page)","ja":"CEPT T/R 61-02（JARLページ参照）"},"url":"https://www.jarl.org/"}]}]};
 </script>
 
 <script src="/assets/js/simulator.js"></script>

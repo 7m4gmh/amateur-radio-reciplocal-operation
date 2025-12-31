@@ -13,6 +13,10 @@ en:
     station_required: "Prior station license application is required."
     station_not_required: "No prior station license application is required."
     no_license_info: "(no license info)"
+  labels:
+    scheme_cept: "CEPT"
+    scheme_cept_novice: "CEPT Novice"
+    scheme_harec: "HAREC"
 
 ja:
   labels:
@@ -29,6 +33,10 @@ ja:
     station_required: "事前の無線局免許申請が必要です。"
     station_not_required: "事前の無線局免許申請は不要です。"
     no_license_info: "（免許情報なし）"
+  labels:
+    scheme_cept: "CEPT"
+    scheme_cept_novice: "CEPT ノービス"
+    scheme_harec: "HAREC"
 nav:
   home:
     en: "Home"

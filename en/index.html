@@ -4,8 +4,6 @@ lang: en
 title: Ham Radio Abroad — Simulator
 ---
 
-{% include header.html %}
-
 <div class="max-w-2xl mx-auto p-8">
   <h2 class="text-2xl font-bold mb-6">Operation Compatibility Checker</h2>
 
@@ -49,5 +47,3 @@ window.COUNTRIES = {{ site.data.countries | jsonify }};
 window.MATRIX = {{ site.data.matrix | jsonify }};
 </script>
 <script src="/assets/js/simulator.js"></script>
-
-{% include footer.html %}

@@ -1,0 +1,46 @@
+---
+# Country-specific license class definitions (stub/sample)
+- id: japan
+  classes:
+    - id: "1st"
+      name:
+        en: "1st Class"
+        ja: "第1級アマチュア無線技士"
+    - id: "2nd"
+      name:
+        en: "2nd Class"
+        ja: "第2級アマチュア無線技士"
+    - id: "3rd"
+      name:
+        en: "3rd Class"
+        ja: "第3級アマチュア無線技士"
+    - id: "4th"
+      name:
+        en: "4th Class"
+        ja: "第4級アマチュア無線技士"
+
+- id: france
+  classes:
+    - id: "full"
+      name:
+        en: "Full"
+        ja: "フル（無線技士相当）"
+    - id: "novice"
+      name:
+        en: "Novice"
+        ja: "ノービス"
+
+- id: usa
+  classes:
+    - id: "extra"
+      name:
+        en: "Extra"
+        ja: "エクストラ"
+    - id: "general"
+      name:
+        en: "General"
+        ja: "ジェネラル"
+    - id: "technician"
+      name:
+        en: "Technician"
+        ja: "テクニシャン"

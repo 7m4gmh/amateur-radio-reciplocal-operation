@@ -19,8 +19,7 @@ title: Ham Radio Abroad — Simulator
   <label class="block mb-3">
     <span>{{ site.data.translations.labels.license_class.en }}</span>
     <select id="license-class" class="w-full border p-2 rounded">
-      <option value="1st Class">1st Class</option>
-      <option value="2nd Class">2nd Class</option>
+      <!-- populated dynamically based on selected home country -->
     </select>
   </label>
 
@@ -42,8 +41,11 @@ title: Ham Radio Abroad — Simulator
 </div>
 
 <script>
+</script>
+<script>
 window.PAGE_LANG = 'en';
 window.COUNTRIES = {{ site.data.countries | jsonify }};
 window.MATRIX = {{ site.data.matrix | jsonify }};
+window.LICENSES = {{ site.data.licenses | jsonify }};
 </script>
 <script src="/assets/js/simulator.js"></script>

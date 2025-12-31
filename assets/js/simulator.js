@@ -20,7 +20,8 @@
     if(common.length > 0){
       const treaty = common[0];
       const info = matrix[treaty] || {};
-      return { ok: true, text: `${nameOf(target)} ${((lang === 'ja') ? 'での運用には' : ' - please consult')} ${info.name || treaty}` };
+      const licensePart = licenseClass ? ((lang === 'ja') ? `（免許: ${licenseClass}）` : ` (license: ${licenseClass})`) : '';
+      return { ok: true, text: `${nameOf(target)} ${((lang === 'ja') ? 'での運用には' : ' - please consult')} ${info.name || treaty}${licensePart}` };
     }
 
     return { ok: false, text: (lang === 'ja') ? `${nameOf(target)}での運用には、相互承認またはCEPT規定の確認が必要です。プリフィックスは ${target.prefix}/ です。` : `${nameOf(target)}: Reciprocity or CEPT rules should be checked. Prefix: ${target.prefix}/` };
@@ -31,14 +32,52 @@
     if(typeof window.COUNTRIES === 'undefined' || typeof window.MATRIX === 'undefined') return;
     const countries = window.COUNTRIES;
     const matrix = window.MATRIX;
+    const licenses = (typeof window.LICENSES !== 'undefined') ? window.LICENSES : null;
 
     const btn = document.getElementById('check-btn');
     if(!btn) return;
 
+    const licenseSelect = document.getElementById('license-class');
+
+    function getLicenseListForCountry(countryId){
+      if(!licenses) return [];
+      const rec = licenses.find(l => l.id === countryId);
+      return rec && rec.classes ? rec.classes : [];
+    }
+
+    function populateLicenseOptions(countryId){
+      if(!licenseSelect) return;
+      // clear
+      licenseSelect.innerHTML = '';
+      const list = getLicenseListForCountry(countryId);
+      const lang = (typeof window !== 'undefined' && window.PAGE_LANG) ? window.PAGE_LANG : 'en';
+      if(list.length === 0){
+        // fallback: add a generic option
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.text = (lang === 'ja') ? '（免許情報なし）' : '(no license info)';
+        licenseSelect.appendChild(opt);
+        return;
+      }
+      list.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.text = (c.name && (c.name[lang] || c.name.en)) || c.id;
+        licenseSelect.appendChild(opt);
+      });
+    }
+
+    // initial populate based on current home-country value (if exists)
+    const homeSelect = document.getElementById('home-country');
+    if(homeSelect){
+      populateLicenseOptions(homeSelect.value);
+      homeSelect.addEventListener('change', (e)=> populateLicenseOptions(e.target.value));
+    }
+
     btn.addEventListener('click', ()=>{
       const home = document.getElementById('home-country').value;
       const target = document.getElementById('target-country').value;
-      const license = document.getElementById('license-class').value;
+      const license = licenseSelect ? licenseSelect.value : '';
       const res = checkCompatibility(home, target, license, countries, matrix);
       const resultDiv = document.getElementById('result');
       const resultText = document.getElementById('result-text');

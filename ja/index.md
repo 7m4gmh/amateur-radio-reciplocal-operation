@@ -8,9 +8,8 @@ title: 海外運用シミュレーター
   <h2 class="text-2xl font-bold mb-6">運用条件をチェック</h2>
 
   <div class="space-y-4">
-    <!-- 免許所持国 -->
     <label class="block">
-      <span>あなたの免許発行国:</span>
+      <span>出発国:</span>
       <select id="home-country" class="w-full border p-2 rounded">
         {% for country in site.data.countries %}
         <option value="{{ country.id }}">{{ country.name.ja }}</option>
@@ -22,8 +21,7 @@ title: 海外運用シミュレーター
     <label class="block">
       <span>免許クラス:</span>
       <select id="license-class" class="w-full border p-2 rounded">
-        <option value="1st Class">第1級アマチュア無線技士</option>
-        <option value="2nd Class">第2級アマチュア無線技士</option>
+        <!-- options populated dynamically by assets/js/simulator.js based on selected home country -->
       </select>
     </label>
 
@@ -52,6 +50,7 @@ title: 海外運用シミュレーター
 window.PAGE_LANG = 'ja';
 window.COUNTRIES = {{ site.data.countries | jsonify }};
 window.MATRIX = {{ site.data.matrix | jsonify }};
+window.LICENSES = {{ site.data.licenses | jsonify }};
 </script>
 <script src="/assets/js/simulator.js"></script>
 

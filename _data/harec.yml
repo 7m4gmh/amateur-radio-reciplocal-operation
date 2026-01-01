@@ -1,5 +1,425 @@
 ---
 # HAREC (Harmonised Amateur Radio Examination Certificate) data
+# Machine-readable mapping derived from JARL beppyo.pdf (transcription).
+
+harec:
+  id: harec
+  name:
+    en: "Harmonised Amateur Radio Examination Certificate (HAREC)"
+    ja: "HAREC（調和アマチュア無線試験証明書）"
+  ratified_by:
+    - country: japan
+      name:
+        en: Japan
+        ja: 日本
+      ratified: true
+      note: "Japan recognises HAREC equivalences as noted in JARL reference"
+  description:
+    en: "HAREC is a harmonised certificate under CEPT/ECC arrangements; many administrations map HAREC to national license classes. This file transcribes the CEPT/HAREC table from JARL's beppyo.pdf."
+    ja: "HAREC は CEPT/ECC による調和された証明書で、各国の国内免許に対応づけられます。本ファイルは JARL beppyo.pdf の CEPT/HAREC 表を機械可読化したものです。"
+
+  mappings:
+    - country: austria
+      name:
+        en: Austria
+        ja: オーストリア
+      harec_equivalents:
+        - harec: "1"
+          national_equivalent: "1"
+          verified: false
+
+    - country: belgium
+      name:
+        en: Belgium
+        ja: ベルギー
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: belarus
+      name:
+        en: Belarus
+        ja: ベラルーシ
+      harec_equivalents:
+        - harec: "A,B"
+          national_equivalent: "A,B"
+          verified: false
+
+    - country: bulgaria
+      name:
+        en: Bulgaria
+        ja: ブルガリア
+      harec_equivalents:
+        - harec: "Class 1"
+          national_equivalent: "Class 1"
+          verified: false
+
+    - country: croatia
+      name:
+        en: Croatia
+        ja: クロアチア
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: cyprus
+      name:
+        en: Cyprus
+        ja: キプロス
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: czech_republic
+      name:
+        en: Czech Republic
+        ja: チェコ共和国
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: denmark
+      name:
+        en: Denmark
+        ja: デンマーク
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: faroe_islands
+      name:
+        en: Faroe Islands
+        ja: フェロー諸島
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: greenland
+      name:
+        en: Greenland
+        ja: グリーンランド
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: estonia
+      name:
+        en: Estonia
+        ja: エストニア
+      harec_equivalents:
+        - harec: "A,B"
+          national_equivalent: "A,B"
+          verified: false
+
+    - country: finland
+      name:
+        en: Finland
+        ja: フィンランド
+      harec_equivalents:
+        - harec: "Y,T"
+          national_equivalent: "Y/T"
+          verified: false
+
+    - country: france
+      name:
+        en: France
+        ja: フランス
+      harec_equivalents:
+        - harec: "HAREC"
+          national_equivalent: "HAREC / Full"
+          verified: false
+
+    - country: germany
+      name:
+        en: Germany
+        ja: ドイツ
+      harec_equivalents:
+        - harec: "1,2,A"
+          national_equivalent: "1/2/A"
+          verified: false
+
+    - country: greece
+      name:
+        en: Greece
+        ja: ギリシャ
+      harec_equivalents:
+        - harec: "1"
+          national_equivalent: "1"
+          verified: false
+
+    - country: hungary
+      name:
+        en: Hungary
+        ja: ハンガリー
+      harec_equivalents:
+        - harec: "(see table)"
+          national_equivalent: "(see table)"
+          verified: false
+
+    - country: iceland
+      name:
+        en: Iceland
+        ja: アイスランド
+      harec_equivalents:
+        - harec: "G"
+          national_equivalent: "G"
+          verified: false
+
+    - country: ireland
+      name:
+        en: Ireland
+        ja: アイルランド
+      harec_equivalents:
+        - harec: "1 & 2"
+          national_equivalent: "1 & 2"
+          verified: false
+
+    - country: italy
+      name:
+        en: Italy
+        ja: イタリア
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: latvia
+      name:
+        en: Latvia
+        ja: ラトビア
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: lithuania
+      name:
+        en: Lithuania
+        ja: リトアニア
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: luxembourg
+      name:
+        en: Luxembourg
+        ja: ルクセンブルク
+      harec_equivalents:
+        - harec: "CEPT"
+          national_equivalent: "CEPT"
+          verified: false
+
+    - country: macedonia
+      name:
+        en: Macedonia (FYROM)
+        ja: 北マケドニア
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: malta
+      name:
+        en: Malta
+        ja: マルタ
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: moldova
+      name:
+        en: Moldova
+        ja: モルドバ
+      harec_equivalents:
+        - harec: "A,B"
+          national_equivalent: "A,B"
+          verified: false
+
+    - country: monaco
+      name:
+        en: Monaco
+        ja: モナコ
+      harec_equivalents:
+        - harec: "Class 1"
+          national_equivalent: "Class 1"
+          verified: false
+
+    - country: montenegro
+      name:
+        en: Montenegro
+        ja: モンテネグロ
+      harec_equivalents:
+        - harec: "A,N"
+          national_equivalent: "A,N"
+          verified: false
+
+    - country: netherlands
+      name:
+        en: Netherlands
+        ja: オランダ
+      harec_equivalents:
+        - harec: "F"
+          national_equivalent: "F"
+          verified: false
+
+    - country: norway
+      name:
+        en: Norway
+        ja: ノルウェー
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: poland
+      name:
+        en: Poland
+        ja: ポーランド
+      harec_equivalents:
+        - harec: "1"
+          national_equivalent: "1"
+          verified: false
+
+    - country: portugal
+      name:
+        en: Portugal
+        ja: ポルトガル
+      harec_equivalents:
+        - harec: "1,A,B"
+          national_equivalent: "1/A/B"
+          verified: false
+
+    - country: romania
+      name:
+        en: Romania
+        ja: ルーマニア
+      harec_equivalents:
+        - harec: "I,II"
+          national_equivalent: "I/II"
+          verified: false
+
+    - country: russian_federation
+      name:
+        en: Russian Federation
+        ja: ロシア連邦
+      harec_equivalents:
+        - harec: "1,2"
+          national_equivalent: "1/2"
+          verified: false
+
+    - country: serbia
+      name:
+        en: Serbia
+        ja: セルビア
+      harec_equivalents:
+        - harec: "1"
+          national_equivalent: "1"
+          verified: false
+
+    - country: slovakia
+      name:
+        en: Slovak Republic
+        ja: スロバキア共和国
+      harec_equivalents:
+        - harec: "E"
+          national_equivalent: "E"
+          verified: false
+
+    - country: slovenia
+      name:
+        en: Slovenia
+        ja: スロベニア
+      harec_equivalents:
+        - harec: "A"
+          national_equivalent: "A"
+          verified: false
+
+    - country: spain
+      name:
+        en: Spain
+        ja: スペイン
+      harec_equivalents:
+        - harec: "CEPT"
+          national_equivalent: "CEPT"
+          verified: false
+
+    - country: sweden
+      name:
+        en: Sweden
+        ja: スウェーデン
+      harec_equivalents:
+        - harec: "1"
+          national_equivalent: "1"
+          verified: false
+
+    - country: switzerland
+      name:
+        en: Switzerland
+        ja: スイス
+      harec_equivalents:
+        - harec: "1,2,CEPT"
+          national_equivalent: "1/2/CEPT"
+          verified: false
+
+    - country: turkey
+      name:
+        en: Turkey
+        ja: トルコ
+      harec_equivalents:
+        - harec: "B"
+          national_equivalent: "B"
+          verified: false
+
+    - country: ukraine
+      name:
+        en: Ukraine
+        ja: ウクライナ
+      harec_equivalents:
+        - harec: "1,2"
+          national_equivalent: "1/2"
+          verified: false
+
+    - country: united_kingdom
+      name:
+        en: United Kingdom
+        ja: イギリス
+      harec_equivalents:
+        - harec: "Full"
+          national_equivalent: "Full"
+          verified: false
+
+    - country: vatican
+      name:
+        en: Vatican City
+        ja: バチカン市国
+      harec_equivalents:
+        - harec: "(see table)"
+          national_equivalent: "(see table)"
+          verified: false
+
+    - country: japan
+      name:
+        en: Japan
+        ja: 日本
+      harec_equivalents:
+        - harec: "HAREC"
+          national_equivalent: "1st"
+          verified: true
+
+# Note: This file is a transcription scaffold. Many rows are marked
+# `verified: false`. I can now proceed to refine/verify these entries
+# against the PDF more precisely if you want.
+---
+# HAREC (Harmonised Amateur Radio Examination Certificate) data
 # This file captures HAREC-related mapping and ratification status.
 # Source / reference: JARL beppyo.pdf (second half lists HAREC mutual-recognition classes)
 
@@ -14,41 +434,402 @@ harec:
         ja: 日本
         en: Japan
       ratified: true
-      note: "As noted in JARL reference; Japan has adopted/recognised HAREC equivalences in practice"
-  description:
-    en: "HAREC is a harmonised certificate produced under CEPT/ECC arrangements; many European administrations map HAREC to their full/national licenses. The JARL reference lists classes and which national licenses are mutually recognised under HAREC."
-    ja: "HAREC は CEPT/ECC による調和された証明書で、多くの欧州の管理当局が HAREC を自国のフル免許等に対応させています。JARL の参考表では相互認証されるクラスが列挙されています。"
+        - country: austria
+          name:
+            en: Austria
+            ja: オーストリア
+          harec_equivalents:
+            - harec: "1"
+              national_equivalent: "1"
+              verified: false
 
-  # per-country HAREC mapping (initial/transcription). verified: false unless checked.
-  mappings:
-    - country: germany
-      name:
-        en: Germany
-        ja: ドイツ
-      harec_equivalents:
-        - harec: "HAREC"
-          national_equivalent: "Class A / Full"
-          verified: false
+        - country: belgium
+          name:
+            en: Belgium
+            ja: ベルギー
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
 
-    - country: france
-      name:
-        en: France
-        ja: フランス
-      harec_equivalents:
-        - harec: "HAREC"
-          national_equivalent: "Full"
-          verified: false
+        - country: belarus
+          name:
+            en: Belarus
+            ja: ベラルーシ
+          harec_equivalents:
+            - harec: "A,B"
+              national_equivalent: "A,B"
+              verified: false
 
-    - country: united_kingdom
-      name:
-        en: United Kingdom
-        ja: イギリス
-      harec_equivalents:
-        - harec: "HAREC"
-          national_equivalent: "Full"
-          verified: false
+        - country: bulgaria
+          name:
+            en: Bulgaria
+            ja: ブルガリア
+          harec_equivalents:
+            - harec: "Class 1"
+              national_equivalent: "Class 1"
+              verified: false
 
-    - country: japan
+        - country: croatia
+          name:
+            en: Croatia
+            ja: クロアチア
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: cyprus
+          name:
+            en: Cyprus
+            ja: キプロス
+          harec_equivalents:
+            - harec: "(see table)"
+              national_equivalent: "A"
+              verified: false
+
+        - country: czech_republic
+          name:
+            en: Czech Republic
+            ja: チェコ共和国
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: denmark
+          name:
+            en: Denmark
+            ja: デンマーク
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: faroe_islands
+          name:
+            en: Faroe islands
+            ja: フェロー諸島
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: greenland
+          name:
+            en: Greenland
+            ja: グリーンランド
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: estonia
+          name:
+            en: Estonia
+            ja: エストニア
+          harec_equivalents:
+            - harec: "A,B"
+              national_equivalent: "A,B"
+              verified: false
+
+        - country: finland
+          name:
+            en: Finland
+            ja: フィンランド
+          harec_equivalents:
+            - harec: "Y,T"
+              national_equivalent: "Y/T"
+              verified: false
+
+        - country: france
+          name:
+            en: France
+            ja: フランス
+          harec_equivalents:
+            - harec: "(HAREC)"
+              national_equivalent: "HAREC / Full"
+              verified: false
+
+        - country: germany
+          name:
+            en: Germany
+            ja: ドイツ
+          harec_equivalents:
+            - harec: "1,2,A"
+              national_equivalent: "1/2/A"
+              verified: false
+
+        - country: greece
+          name:
+            en: Greece
+            ja: ギリシャ
+          harec_equivalents:
+            - harec: "1"
+              national_equivalent: "1"
+              verified: false
+
+        - country: hungary
+          name:
+            en: Hungary
+            ja: ハンガリー
+          harec_equivalents:
+            - harec: "(see table)"
+              national_equivalent: "(see table)"
+              verified: false
+
+        - country: iceland
+          name:
+            en: Iceland
+            ja: アイスランド
+          harec_equivalents:
+            - harec: "G"
+              national_equivalent: "G"
+              verified: false
+
+        - country: ireland
+          name:
+            en: Ireland
+            ja: アイルランド
+          harec_equivalents:
+            - harec: "CEPT 1 & CEPT 2"
+              national_equivalent: "1 & 2"
+              verified: false
+
+        - country: italy
+          name:
+            en: Italy
+            ja: イタリア
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: latvia
+          name:
+            en: Latvia
+            ja: ラトビア
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: lithuania
+          name:
+            en: Lithuania
+            ja: リトアニア
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: luxembourg
+          name:
+            en: Luxembourg
+            ja: ルクセンブルク
+          harec_equivalents:
+            - harec: "CEPT"
+              national_equivalent: "CEPT"
+              verified: false
+
+        - country: macedonia
+          name:
+            en: Macedonia (FYROM)
+            ja: 北マケドニア
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: malta
+          name:
+            en: Malta
+            ja: マルタ
+          harec_equivalents:
+            - harec: "(old also 2)"
+              national_equivalent: "A"
+              verified: false
+
+        - country: moldova
+          name:
+            en: Moldova
+            ja: モルドバ
+          harec_equivalents:
+            - harec: "A and B"
+              national_equivalent: "A,B"
+              verified: false
+
+        - country: monaco
+          name:
+            en: Monaco
+            ja: モナコ
+          harec_equivalents:
+            - harec: "Class 1"
+              national_equivalent: "Class 1"
+              verified: false
+
+        - country: montenegro
+          name:
+            en: Montenegro
+            ja: モンテネグロ
+          harec_equivalents:
+            - harec: "A and N"
+              national_equivalent: "A,N"
+              verified: false
+
+        - country: netherlands
+          name:
+            en: Netherlands
+            ja: オランダ
+          harec_equivalents:
+            - harec: "F"
+              national_equivalent: "F"
+              verified: false
+
+        - country: norway
+          name:
+            en: Norway
+            ja: ノルウェー
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: poland
+          name:
+            en: Poland
+            ja: ポーランド
+          harec_equivalents:
+            - harec: "1"
+              national_equivalent: "1"
+              verified: false
+
+        - country: portugal
+          name:
+            en: Portugal
+            ja: ポルトガル
+          harec_equivalents:
+            - harec: "1, A and B"
+              national_equivalent: "1/A/B"
+              verified: false
+
+        - country: romania
+          name:
+            en: Romania
+            ja: ルーマニア
+          harec_equivalents:
+            - harec: "I and II"
+              national_equivalent: "I/II"
+              verified: false
+
+        - country: russian_federation
+          name:
+            en: Russian Federation
+            ja: ロシア連邦
+          harec_equivalents:
+            - harec: "1,2"
+              national_equivalent: "1/2"
+              verified: false
+
+        - country: serbia
+          name:
+            en: Serbia
+            ja: セルビア
+          harec_equivalents:
+            - harec: "1"
+              national_equivalent: "1"
+              verified: false
+
+        - country: slovakia
+          name:
+            en: Slovak Republic
+            ja: スロバキア共和国
+          harec_equivalents:
+            - harec: "E"
+              national_equivalent: "E"
+              verified: false
+
+        - country: slovenia
+          name:
+            en: Slovenia
+            ja: スロベニア
+          harec_equivalents:
+            - harec: "A"
+              national_equivalent: "A"
+              verified: false
+
+        - country: spain
+          name:
+            en: Spain
+            ja: スペイン
+          harec_equivalents:
+            - harec: "CEPT"
+              national_equivalent: "CEPT"
+              verified: false
+
+        - country: sweden
+          name:
+            en: Sweden
+            ja: スウェーデン
+          harec_equivalents:
+            - harec: "1"
+              national_equivalent: "1"
+              verified: false
+
+        - country: switzerland
+          name:
+            en: Switzerland
+            ja: スイス
+          harec_equivalents:
+            - harec: "1,2,CEPT"
+              national_equivalent: "1/2/CEPT"
+              verified: false
+
+        - country: turkey
+          name:
+            en: Turkey
+            ja: トルコ
+          harec_equivalents:
+            - harec: "B"
+              national_equivalent: "B"
+              verified: false
+
+        - country: ukraine
+          name:
+            en: Ukraine
+            ja: ウクライナ
+          harec_equivalents:
+            - harec: "1,2"
+              national_equivalent: "1/2"
+              verified: false
+
+        - country: united_kingdom
+          name:
+            en: United Kingdom
+            ja: イギリス
+          harec_equivalents:
+            - harec: "Full"
+              national_equivalent: "Full"
+              verified: false
+
+        - country: vatican
+          name:
+            en: Vatican City
+            ja: バチカン市国
+          harec_equivalents:
+            - harec: "(see table)"
+              national_equivalent: "(see table)"
+              verified: false
+
+        # Japan entry (ratified)
+        - country: japan
+          name:
+            en: Japan
+            ja: 日本
+          harec_equivalents:
+            - harec: "HAREC"
+              national_equivalent: "1st"
+              verified: true
       name:
         en: Japan
         ja: 日本

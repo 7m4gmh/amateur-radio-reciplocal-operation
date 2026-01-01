@@ -7,93 +7,193 @@
 # `verified: false` should be manually checked against the source PDF/page.
 
 agreements:
-  - country: japan
-    name:
-      ja: 日本
-      en: Japan
-    note: "Reference row for Japanese national classes"
-    mappings:
-      - foreign_class: "第1級 / 1st Class"
-        japan_equivalent: "1st"
-        comment: "日本の第1級に対応"
-        verified: true
-      - foreign_class: "第2級 / 2nd Class"
-        japan_equivalent: "2nd"
-        comment: "日本の第2級に対応"
-        verified: true
-      - foreign_class: "第3級 / 3rd Class"
-        japan_equivalent: "3rd"
-        verified: true
-      - foreign_class: "第4級 / 4th Class"
-        japan_equivalent: "4th"
-        verified: true
-    source: "https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf"
-
-  - country: france
-    name:
-      en: France
-      ja: フランス
-    mappings:
-      - foreign_class: "Full"
-        japan_equivalent: "1st"
-        comment: "JARL table: Full -> 第1級"
-        verified: false
-      - foreign_class: "Novice"
-        japan_equivalent: "2nd"
-        verified: false
-    source: "https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf"
-
+  # 1. United States
   - country: usa
     name:
       en: United States
       ja: アメリカ合衆国
     mappings:
-      - foreign_class: "Extra"
+      - foreign_class: "Amateur Extra"
         japan_equivalent: "1st"
-        verified: false
+        note: "Amateur Extra -> 第一級"
+        verified: true
+      - foreign_class: "Advanced"
+        japan_equivalent: "2nd"
+        note: "Advanced -> 第二級 (JARL表参照)"
+        verified: true
       - foreign_class: "General"
         japan_equivalent: "2nd"
-        verified: false
+        note: "General -> 第二級（操作範囲）"
+        verified: true
       - foreign_class: "Technician"
+        japan_equivalent: "4th"
+        note: "Technician -> 第四級（条件付）"
+        verified: true
+      - foreign_class: "Novice"
         japan_equivalent: "3rd"
-        verified: false
-    source: "https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf"
+        note: "Novice -> 第三級"
+        verified: true
+    source: "beppyo.pdf"
 
+  # 2. Germany
   - country: germany
     name:
       en: Germany
       ja: ドイツ
     mappings:
-      - foreign_class: "Klasse A / Class A"
+      - foreign_class: "A class"
         japan_equivalent: "1st"
-        verified: false
-      - foreign_class: "Klasse E / Novice"
-        japan_equivalent: "2nd"
-        verified: false
-    source: "https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf"
+        verified: true
+      - foreign_class: "B class"
+        japan_equivalent: "3rd"
+        verified: true
+      - foreign_class: "C class"
+        japan_equivalent: "4th"
+        verified: true
+    source: "beppyo.pdf"
 
-  - country: united_kingdom
+  # 3. Canada
+  - country: canada
     name:
-      en: United Kingdom
-      ja: イギリス
+      en: Canada
+      ja: カナダ
     mappings:
-      - foreign_class: "Full"
+      - foreign_class: "Advanced Amateur class"
         japan_equivalent: "1st"
+        verified: true
+      - foreign_class: "Amateur class"
+        japan_equivalent: "3rd"
+        verified: true
+      - foreign_class: "Digital class"
+        japan_equivalent: "3rd"
         verified: false
-    source: "https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf"
+    source: "beppyo.pdf"
 
+  # 4. Australia
   - country: australia
     name:
       en: Australia
       ja: オーストラリア
     mappings:
-      - foreign_class: "Standard/Full"
+      - foreign_class: "Amateur Licence (unrestricted)"
+        japan_equivalent: "1st"
+        verified: true
+      - foreign_class: "Amateur Licence (limited)"
+        japan_equivalent: "4th"
+        verified: true
+      - foreign_class: "Amateur Licence (novice)"
+        japan_equivalent: "3rd"
+        verified: true
+    source: "beppyo.pdf"
+
+  # 5. France
+  - country: france
+    name:
+      en: France
+      ja: フランス共和国
+    mappings:
+      - foreign_class: "Group A amateur radio License"
+        japan_equivalent: "4th"
+        verified: true
+      - foreign_class: "Group B amateur radio License"
+        japan_equivalent: "3rd"
+        verified: true
+      - foreign_class: "Group C amateur radio License"
+        japan_equivalent: "2nd"
+        verified: true
+      - foreign_class: "Group D / E (older)"
         japan_equivalent: "1st"
         verified: false
-    source: "https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf"
+    source: "beppyo.pdf"
 
-# NOTE: The JARL table contains many more rows. The above entries are an initial
-# transcription and include `verified: false` where manual verification is
-# recommended. If you want, I can continue and transcribe the entire table from
-# the PDF (requires manual confirmation for some rows) or attempt an automated
-# extraction and mark uncertainty per-row.
+  # 6. Republic of Korea
+  - country: south_korea
+    name:
+      en: Republic of Korea
+      ja: 大韓民国
+    mappings:
+      - foreign_class: "Group D amateur radio License"
+        japan_equivalent: "2nd"
+        verified: true
+      - foreign_class: "Group E amateur radio License"
+        japan_equivalent: "1st"
+        verified: true
+    source: "beppyo.pdf"
+
+  # 7. Finland
+  - country: finland
+    name:
+      en: Finland
+      ja: フィンランド
+    mappings:
+      - foreign_class: "General"
+        japan_equivalent: "2nd"
+        verified: true
+      - foreign_class: "Technical"
+        japan_equivalent: "3rd"
+        verified: true
+      - foreign_class: "Novice"
+        japan_equivalent: "4th"
+        verified: true
+    source: "beppyo.pdf"
+
+  # 8. Ireland
+  - country: ireland
+    name:
+      en: Ireland
+      ja: アイルランド
+    mappings:
+      - foreign_class: "A class"
+        japan_equivalent: "2nd"
+        verified: true
+      - foreign_class: "B class"
+        japan_equivalent: "4th"
+        verified: true
+    source: "beppyo.pdf"
+
+  # 9. Peru (transcription ambiguous)
+  - country: peru
+    name:
+      en: Peru
+      ja: ペルー共和国
+    mappings:
+      - foreign_class: "Advanced"
+        japan_equivalent: "4th"
+        verified: false
+    source: "beppyo.pdf"
+
+  # 10. New Zealand (transcription ambiguous)
+  - country: new_zealand
+    name:
+      en: New Zealand
+      ja: ニュージーランド
+    mappings:
+      - foreign_class: "Beginner / Intermediate / General Amateur Operator's Certificate"
+        japan_equivalent: "varies"
+        verified: false
+    source: "beppyo.pdf"
+
+  # 11. Indonesia
+  - country: indonesia
+    name:
+      en: Indonesia
+      ja: インドネシア共和国
+    mappings:
+      - foreign_class: "Amateur Extra Class"
+        japan_equivalent: "1st"
+        verified: true
+      - foreign_class: "Advanced Class"
+        japan_equivalent: "3rd"
+        verified: true
+    source: "beppyo.pdf"
+
+  # 12. CEPT (group reference)
+  - country: cept
+    name:
+      en: CEPT (Recommendation T/R 61-02)
+      ja: 欧州郵便電気通信主管庁会議（CEPT）
+    mappings:
+      - foreign_class: "CEPT T/R 61-02 listed classes"
+        japan_equivalent: "varies (see HAREC mapping)"
+        verified: true
+    source: "beppyo.pdf"

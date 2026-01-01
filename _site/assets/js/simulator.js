@@ -79,9 +79,19 @@
     const licenseSelect = document.getElementById('license-class');
     const homeSchemesDiv = document.getElementById('home-schemes');
     const targetSchemesDiv = document.getElementById('target-schemes');
-  const homeTreatiesDiv = document.getElementById('home-treaties');
-  const targetTreatiesDiv = document.getElementById('target-treaties');
-  const treatyResultsDiv = document.getElementById('treaty-results');
+    const homeTreatiesDiv = document.getElementById('home-treaties');
+    const targetTreatiesDiv = document.getElementById('target-treaties');
+    const treatyResultsDiv = document.getElementById('treaty-results');
+    // localization helpers for this wiring scope
+    const lang = (typeof window !== 'undefined' && window.PAGE_LANG) ? window.PAGE_LANG : 'en';
+    const translations = (typeof window !== 'undefined' && window.TRANSLATIONS) ? (window.TRANSLATIONS[lang] || window.TRANSLATIONS['en']) : null;
+    const t = (key, fallback) => {
+      if(!translations) return (fallback || '');
+      const parts = key.split('.');
+      let cur = translations;
+      for(let p of parts){ if(cur[p] === undefined) return (fallback || ''); cur = cur[p]; }
+      return cur;
+    };
 
     function renderSchemes(countryId, container){
       if(!container) return;
@@ -127,27 +137,58 @@
         treatyResultsDiv.innerText = (t('messages.no_country_data', (lang === 'ja') ? '共通の条約は見つかりませんでした。' : 'No common treaty found.'));
         return;
       }
-      // build HTML table of applicable treaties
-      let html = '<div class="font-semibold mb-2">' + ((lang==='ja')? '共通の条約/協定' : 'Common treaties/agreements') + '</div>';
-      html += '<ul class="list-disc ml-5">';
+
+      // Build an accessible table
+      let html = '';
+      html += `<div class="font-semibold mb-2">${(lang==='ja')? '共通の条約/協定' : 'Common treaties/agreements'}</div>`;
+      html += '<div class="overflow-x-auto"><table class="treaty-table" style="border-collapse:collapse;width:100%;">';
+      // header
+      html += '<thead><tr style="background:#f3f4f6;">';
+      html += `<th style="text-align:left;padding:8px;border:1px solid #e5e7eb;">${(lang==='ja')? '条約名' : 'Treaty'}</th>`;
+      html += `<th style="text-align:left;padding:8px;border:1px solid #e5e7eb;">${(lang==='ja')? '注記' : 'Note'}</th>`;
+      html += `<th style="text-align:left;padding:8px;border:1px solid #e5e7eb;">${(lang==='ja')? '免許対応' : 'License mapping'}</th>`;
+      html += `<th style="text-align:left;padding:8px;border:1px solid #e5e7eb;">${(lang==='ja')? '事前無線局免許' : 'Prior station license'}</th>`;
+      html += `<th style="text-align:left;padding:8px;border:1px solid #e5e7eb;">${(lang==='ja')? '参照' : 'References'}</th>`;
+      html += '</tr></thead>';
+
+      html += '<tbody>';
       common.forEach(key => {
         const info = matrix[key] || {};
-        html += '<li class="mb-2">';
-        html += `<div class="font-medium">${info.name || key}</div>`;
-        if(info.note) html += `<div class="text-sm text-gray-700">${info.note}</div>`;
-        // if conditions exist, try to match licenseClass
+        const name = info.name || key;
+        const note = info.note || '';
+
+        // find condition best match
+        let mapping = '';
+        let stationReq = '';
         if(info.conditions && licenseClass){
           const cond = info.conditions.find(c => c.home_class && c.home_class.toLowerCase().includes(licenseClass.toLowerCase()));
           if(cond){
-            html += `<div class="text-sm">${(lang==='ja')? '免許対応: ' : 'License mapping: '} ${cond.equivalent || cond.home_class}</div>`;
+            mapping = cond.equivalent || cond.home_class || '';
             if(typeof cond.requires_station_license !== 'undefined'){
-              html += `<div class="text-sm">${cond.requires_station_license ? (lang==='ja'?'事前の無線局免許申請が必要':'Prior station license required') : (lang==='ja'?'事前の無線局免許申請は不要':'No prior station license required')}</div>`;
+              stationReq = cond.requires_station_license ? ((lang==='ja')? '必要' : 'Required') : ((lang==='ja')? '不要' : 'Not required');
             }
           }
         }
-        html += '</li>';
+
+        // links from matrix or fallback to rules' application_url
+        const refs = [];
+        if(info.links && Array.isArray(info.links)){
+          info.links.forEach(l => { if(l.url) refs.push(`<a href="${l.url}" target="_blank" rel="noopener noreferrer">${(l.title? (l.title[lang]||l.title.en) : l.url)}</a>`); });
+        }
+        // fallback: check rules for explicit home->target application_url
+        const rule = (window.RULES && window.RULES.rules) ? window.RULES.rules.find(r => r.home === homeId && r.target === targetId) : null;
+        if(rule && rule.application_url) refs.push(`<a href="${rule.application_url}" target="_blank" rel="noopener noreferrer">${(lang==='ja')? '申請情報' : 'Application info'}</a>`);
+
+        html += '<tr>';
+        html += `<td style="padding:8px;border:1px solid #e5e7eb;vertical-align:top;">${name}</td>`;
+        html += `<td style="padding:8px;border:1px solid #e5e7eb;vertical-align:top;">${note}</td>`;
+        html += `<td style="padding:8px;border:1px solid #e5e7eb;vertical-align:top;">${mapping}</td>`;
+        html += `<td style="padding:8px;border:1px solid #e5e7eb;vertical-align:top;">${stationReq}</td>`;
+        html += `<td style="padding:8px;border:1px solid #e5e7eb;vertical-align:top;">${refs.join('<br/>')}</td>`;
+        html += '</tr>';
       });
-      html += '</ul>';
+      html += '</tbody></table></div>';
+
       treatyResultsDiv.innerHTML = html;
     }
 

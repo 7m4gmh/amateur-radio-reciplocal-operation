@@ -8,7 +8,7 @@
     - "iarp"
   cept: false
   cept_novice: false
-  harec: false
+  harec: true
 - id: france
   name:
     en: "France"

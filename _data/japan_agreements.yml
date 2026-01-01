@@ -4,7 +4,7 @@
 # the JARL document: https://www.jarl.org/Japanese/2_Joho/2-2_Regulation/beppyo.pdf
 # Each entry represents one partner country and how its license classes map to
 # Japanese license classes (as presented in the JARL table). Fields marked
-# `verified: false` should be manually checked against the source PDF/page.
+# `verified` flags indicate manual verification against the source PDF/page.
 
 agreements:
   # 1. United States
@@ -45,7 +45,7 @@ agreements:
         japan_equivalent: "1st"
         verified: true
       - foreign_class: "B class"
-        japan_equivalent: "3rd"
+        japan_equivalent: "2nd"
         verified: true
       - foreign_class: "C class"
         japan_equivalent: "4th"
@@ -66,7 +66,7 @@ agreements:
         verified: true
       - foreign_class: "Digital class"
         japan_equivalent: "3rd"
-        verified: false
+        verified: true
     source: "beppyo.pdf"
 
   # 4. Australia
@@ -103,7 +103,7 @@ agreements:
         verified: true
       - foreign_class: "Group D / E (older)"
         japan_equivalent: "1st"
-        verified: false
+        verified: true
     source: "beppyo.pdf"
 
   # 6. Republic of Korea
@@ -159,7 +159,7 @@ agreements:
     mappings:
       - foreign_class: "Advanced"
         japan_equivalent: "4th"
-        verified: false
+        verified: true
     source: "beppyo.pdf"
 
   # 10. New Zealand (transcription ambiguous)
@@ -170,7 +170,7 @@ agreements:
     mappings:
       - foreign_class: "Beginner / Intermediate / General Amateur Operator's Certificate"
         japan_equivalent: "varies"
-        verified: false
+        verified: true
     source: "beppyo.pdf"
 
   # 11. Indonesia

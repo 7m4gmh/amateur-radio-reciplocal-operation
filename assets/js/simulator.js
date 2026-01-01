@@ -93,6 +93,38 @@
       return cur;
     };
 
+    function buildCountryMap(){
+      const map = {};
+      // Start with explicit COUNTRIES list if available
+      if(Array.isArray(window.COUNTRIES)){
+        window.COUNTRIES.forEach(c => { map[c.id] = c; });
+      }
+      // Merge HAREC mappings
+      if(window.HAREC && Array.isArray(window.HAREC.mappings)){
+        window.HAREC.mappings.forEach(m => {
+          if(!m || !m.country) return;
+          if(!map[m.country]) map[m.country] = { id: m.country, name: m.name || { en: m.country, ja: m.country }, treaties: [] };
+        });
+      }
+      // Merge Japan agreements
+      if(window.JAPAN_AGREEMENTS && Array.isArray(window.JAPAN_AGREEMENTS.agreements)){
+        window.JAPAN_AGREEMENTS.agreements.forEach(a => {
+          if(!a || !a.country) return;
+          if(!map[a.country]) map[a.country] = { id: a.country, name: a.name || { en: a.country, ja: a.country }, treaties: [] };
+        });
+      }
+      // Merge any countries referenced in MATRIX entries (treaty members)
+      if(window.MATRIX){
+        Object.keys(window.MATRIX).forEach(k => {
+          const info = window.MATRIX[k];
+          if(info && info.members && Array.isArray(info.members)){
+            info.members.forEach(mid => { if(!map[mid]) map[mid] = { id: mid, name: { en: mid, ja: mid }, treaties: [] }; });
+          }
+        });
+      }
+      return map;
+    }
+
     function renderSchemes(countryId, container){
       if(!container) return;
       const country = findCountry(countries, countryId);
@@ -223,6 +255,36 @@
     // initial populate based on current home-country value (if exists)
     const homeSelect = document.getElementById('home-country');
     if(homeSelect){
+      // populate selects from union of data files
+      const cmap = buildCountryMap();
+      const allCountries = Object.keys(cmap).map(id => cmap[id]);
+      // sort by localized name
+      allCountries.sort((a,b)=>{
+        const an = (a.name && (a.name[lang] || a.name.en)) || a.id;
+        const bn = (b.name && (b.name[lang] || b.name.en)) || b.id;
+        return an.localeCompare(bn);
+      });
+      // clear and fill home and target selects
+      homeSelect.innerHTML = '';
+      const targetSelectElem = document.getElementById('target-country');
+      if(targetSelectElem) targetSelectElem.innerHTML = '';
+      allCountries.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.text = (c.name && (c.name[lang] || c.name.en)) || c.id;
+        homeSelect.appendChild(opt);
+        if(targetSelectElem){
+          const opt2 = document.createElement('option');
+          opt2.value = c.id;
+          opt2.text = (c.name && (c.name[lang] || c.name.en)) || c.id;
+          targetSelectElem.appendChild(opt2);
+        }
+      });
+
+      // choose sensible defaults if present
+      if(allCountries.find(c=>c.id==='japan')) homeSelect.value = 'japan';
+      if(allCountries.find(c=>c.id==='usa') && targetSelectElem) targetSelectElem.value = 'usa';
+
       populateLicenseOptions(homeSelect.value);
       homeSelect.addEventListener('change', (e)=> { populateLicenseOptions(e.target.value); renderSchemes(e.target.value, homeSchemesDiv); renderTreaties(e.target.value, homeTreatiesDiv); renderTreatyResults(e.target.value, (targetSelect?targetSelect.value:null), licenseSelect?licenseSelect.value:null); });
       // initial render

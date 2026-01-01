@@ -11,9 +11,7 @@ title: 海外運用シミュレーター
     <label class="block">
       <span>{{ site.data.translations.ja.labels.home_country }}</span>
       <select id="home-country" class="w-full border p-2 rounded">
-        {% for country in site.data.countries %}
-        <option value="{{ country.id }}">{{ country.name.ja }}</option>
-        {% endfor %}
+        <!-- options populated dynamically by assets/js/simulator.js -->
       </select>
     </label>
 
@@ -37,9 +35,7 @@ title: 海外運用シミュレーター
     <label class="block">
       <span>{{ site.data.translations.ja.labels.target_country }}</span>
       <select id="target-country" class="w-full border p-2 rounded">
-        {% for country in site.data.countries %}
-        <option value="{{ country.id }}">{{ country.name.ja }}</option>
-        {% endfor %}
+        <!-- options populated dynamically by assets/js/simulator.js -->
       </select>
     </label>
 
@@ -72,6 +68,9 @@ window.COUNTRIES = {{ site.data.countries | jsonify }};
 window.MATRIX = {{ site.data.matrix | jsonify }};
 window.LICENSES = {{ site.data.licenses | jsonify }};
 window.RULES = {{ site.data.rules | jsonify }};
+window.HAREC = {{ site.data.harec | jsonify }};
+window.JAPAN_AGREEMENTS = {{ site.data.japan_agreements | jsonify }};
+window.TRANSLATIONS = {{ site.data.translations | jsonify }};
 </script>
 <script src="/assets/js/simulator.js"></script>
 

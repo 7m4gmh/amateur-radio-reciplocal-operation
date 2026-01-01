@@ -21,6 +21,10 @@ title: 海外運用シミュレーター
       <!-- populated by simulator.js: CEPT / CEPT Novice / HAREC applicability for home -->
     </div>
 
+    <div id="home-treaties" class="text-sm text-gray-700 mt-1">
+      <!-- list of treaties the home country is part of -->
+    </div>
+
     <!-- 免許クラス -->
     <label class="block">
       <span>{{ site.data.translations.ja.labels.license_class }}</span>
@@ -41,6 +45,14 @@ title: 海外運用シミュレーター
 
     <div id="target-schemes" class="text-sm text-gray-700 mt-2">
       <!-- populated by simulator.js: CEPT / CEPT Novice / HAREC applicability for target -->
+    </div>
+
+    <div id="target-treaties" class="text-sm text-gray-700 mt-1">
+      <!-- list of treaties the target country is part of -->
+    </div>
+
+    <div id="treaty-results" class="mt-4 p-2 border rounded bg-gray-50 text-sm">
+      <!-- applicable treaty lookup results will appear here -->
     </div>
 
   <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded shadow">{{ site.data.translations.ja.buttons.check }}</button>

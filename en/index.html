@@ -20,6 +20,10 @@ title: Ham Radio Abroad — Simulator
     <!-- populated by simulator.js: CEPT / CEPT Novice / HAREC applicability for home -->
   </div>
 
+  <div id="home-treaties" class="text-sm text-gray-700 mt-1">
+    <!-- list of treaties the home country is part of -->
+  </div>
+
   <label class="block mb-3">
     <span>{{ site.data.translations.labels.license_class.en }}</span>
     <select id="license-class" class="w-full border p-2 rounded">
@@ -38,6 +42,14 @@ title: Ham Radio Abroad — Simulator
 
   <div id="target-schemes" class="text-sm text-gray-700 mt-2">
     <!-- populated by simulator.js: CEPT / CEPT Novice / HAREC applicability for target -->
+  </div>
+
+  <div id="target-treaties" class="text-sm text-gray-700 mt-1">
+    <!-- list of treaties the target country is part of -->
+  </div>
+
+  <div id="treaty-results" class="mt-4 p-2 border rounded bg-gray-50 text-sm">
+    <!-- applicable treaty lookup results will appear here -->
   </div>
 
   <button id="check-btn" class="bg-blue-600 text-white px-6 py-2 rounded">{{ site.data.translations.en.buttons.check }}</button>

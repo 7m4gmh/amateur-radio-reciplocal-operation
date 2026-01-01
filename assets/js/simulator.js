@@ -79,6 +79,9 @@
     const licenseSelect = document.getElementById('license-class');
     const homeSchemesDiv = document.getElementById('home-schemes');
     const targetSchemesDiv = document.getElementById('target-schemes');
+  const homeTreatiesDiv = document.getElementById('home-treaties');
+  const targetTreatiesDiv = document.getElementById('target-treaties');
+  const treatyResultsDiv = document.getElementById('treaty-results');
 
     function renderSchemes(countryId, container){
       if(!container) return;
@@ -94,6 +97,58 @@
       lines.push(`${label('scheme_cept_novice', 'CEPT Novice')}: ${country.cept_novice ? yes : no}`);
       lines.push(`${label('scheme_harec', 'HAREC')}: ${country.harec ? yes : no}`);
       container.innerText = lines.join(' | ');
+    }
+
+    function renderTreaties(countryId, container){
+      if(!container) return;
+      const country = findCountry(countries, countryId);
+      if(!country){ container.innerText = ''; return; }
+      const tkeys = country.treaties || [];
+      if(tkeys.length === 0){ container.innerText = (t('messages.no_country_data','No treaty info')); return; }
+      // show friendly names where possible from matrix
+      const parts = tkeys.map(k => {
+        const info = matrix[k] || {};
+        return info.name ? `${info.name} (${k})` : k;
+      });
+      container.innerText = parts.join(' | ');
+    }
+
+    function renderTreatyResults(homeId, targetId, licenseClass){
+      if(!treatyResultsDiv) return;
+      treatyResultsDiv.innerHTML = '';
+      const home = findCountry(countries, homeId);
+      const target = findCountry(countries, targetId);
+      if(!home || !target) return;
+      const homeTreaties = home.treaties || [];
+      const targetTreaties = target.treaties || [];
+      // intersection
+      const common = homeTreaties.filter(t => targetTreaties.includes(t));
+      if(common.length === 0){
+        treatyResultsDiv.innerText = (t('messages.no_country_data', (lang === 'ja') ? '共通の条約は見つかりませんでした。' : 'No common treaty found.'));
+        return;
+      }
+      // build HTML table of applicable treaties
+      let html = '<div class="font-semibold mb-2">' + ((lang==='ja')? '共通の条約/協定' : 'Common treaties/agreements') + '</div>';
+      html += '<ul class="list-disc ml-5">';
+      common.forEach(key => {
+        const info = matrix[key] || {};
+        html += '<li class="mb-2">';
+        html += `<div class="font-medium">${info.name || key}</div>`;
+        if(info.note) html += `<div class="text-sm text-gray-700">${info.note}</div>`;
+        // if conditions exist, try to match licenseClass
+        if(info.conditions && licenseClass){
+          const cond = info.conditions.find(c => c.home_class && c.home_class.toLowerCase().includes(licenseClass.toLowerCase()));
+          if(cond){
+            html += `<div class="text-sm">${(lang==='ja')? '免許対応: ' : 'License mapping: '} ${cond.equivalent || cond.home_class}</div>`;
+            if(typeof cond.requires_station_license !== 'undefined'){
+              html += `<div class="text-sm">${cond.requires_station_license ? (lang==='ja'?'事前の無線局免許申請が必要':'Prior station license required') : (lang==='ja'?'事前の無線局免許申請は不要':'No prior station license required')}</div>`;
+            }
+          }
+        }
+        html += '</li>';
+      });
+      html += '</ul>';
+      treatyResultsDiv.innerHTML = html;
     }
 
     function getLicenseListForCountry(countryId){
@@ -128,16 +183,23 @@
     const homeSelect = document.getElementById('home-country');
     if(homeSelect){
       populateLicenseOptions(homeSelect.value);
-      homeSelect.addEventListener('change', (e)=> { populateLicenseOptions(e.target.value); renderSchemes(e.target.value, homeSchemesDiv); });
+      homeSelect.addEventListener('change', (e)=> { populateLicenseOptions(e.target.value); renderSchemes(e.target.value, homeSchemesDiv); renderTreaties(e.target.value, homeTreatiesDiv); renderTreatyResults(e.target.value, (targetSelect?targetSelect.value:null), licenseSelect?licenseSelect.value:null); });
       // initial render
       renderSchemes(homeSelect.value, homeSchemesDiv);
+      renderTreaties(homeSelect.value, homeTreatiesDiv);
     }
 
     const targetSelect = document.getElementById('target-country');
     if(targetSelect){
-      targetSelect.addEventListener('change', (e)=> renderSchemes(e.target.value, targetSchemesDiv));
+      targetSelect.addEventListener('change', (e)=> { renderSchemes(e.target.value, targetSchemesDiv); renderTreaties(e.target.value, targetTreatiesDiv); renderTreatyResults((homeSelect?homeSelect.value:null), e.target.value, licenseSelect?licenseSelect.value:null); });
       // initial render
       renderSchemes(targetSelect.value, targetSchemesDiv);
+      renderTreaties(targetSelect.value, targetTreatiesDiv);
+    }
+
+    // update treaty results when license changes
+    if(licenseSelect){
+      licenseSelect.addEventListener('change', (e)=> renderTreatyResults((homeSelect?homeSelect.value:null), (targetSelect?targetSelect.value:null), e.target.value));
     }
 
     btn.addEventListener('click', ()=>{

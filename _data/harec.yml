@@ -1,0 +1,63 @@
+---
+# HAREC (Harmonised Amateur Radio Examination Certificate) data
+# This file captures HAREC-related mapping and ratification status.
+# Source / reference: JARL beppyo.pdf (second half lists HAREC mutual-recognition classes)
+
+harec:
+  id: harec
+  name:
+    en: "Harmonised Amateur Radio Examination Certificate (HAREC)"
+    ja: "HAREC（調和アマチュア無線試験証明書）"
+  ratified_by:
+    - country: japan
+      name:
+        ja: 日本
+        en: Japan
+      ratified: true
+      note: "As noted in JARL reference; Japan has adopted/recognised HAREC equivalences in practice"
+  description:
+    en: "HAREC is a harmonised certificate produced under CEPT/ECC arrangements; many European administrations map HAREC to their full/national licenses. The JARL reference lists classes and which national licenses are mutually recognised under HAREC."
+    ja: "HAREC は CEPT/ECC による調和された証明書で、多くの欧州の管理当局が HAREC を自国のフル免許等に対応させています。JARL の参考表では相互認証されるクラスが列挙されています。"
+
+  # per-country HAREC mapping (initial/transcription). verified: false unless checked.
+  mappings:
+    - country: germany
+      name:
+        en: Germany
+        ja: ドイツ
+      harec_equivalents:
+        - harec: "HAREC"
+          national_equivalent: "Class A / Full"
+          verified: false
+
+    - country: france
+      name:
+        en: France
+        ja: フランス
+      harec_equivalents:
+        - harec: "HAREC"
+          national_equivalent: "Full"
+          verified: false
+
+    - country: united_kingdom
+      name:
+        en: United Kingdom
+        ja: イギリス
+      harec_equivalents:
+        - harec: "HAREC"
+          national_equivalent: "Full"
+          verified: false
+
+    - country: japan
+      name:
+        en: Japan
+        ja: 日本
+      harec_equivalents:
+        - harec: "HAREC"
+          national_equivalent: "1st"
+          verified: true
+
+# Note: This file is intended as a structured starting point. The JARL PDF
+# contains a definitive table; if you want, I can attempt an automated (OCR/PDF)
+# extraction to populate all rows and mark confidence, or manually transcribe the
+# remaining countries. Tell meどちらの方法を希望するか指示ください。

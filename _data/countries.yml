@@ -28,6 +28,6 @@
     - "cept_tr6101"
     - "reciprocal_jp_us"
     - "iarp"
-  cept: false
+  cept: true
   cept_novice: false
   harec: false
